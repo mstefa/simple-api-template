@@ -1,0 +1,11 @@
+POST http://localhost:5000/blogpost HTTP/1.1
+content-type: application/json
+
+  {
+    "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
+    "title": "mstefa",
+    "description": "Test1234",
+    "body": "matias",
+    "date": "stefanutti",
+    "authorEmail": "mstefanutti24@gmail.com"
+  }
