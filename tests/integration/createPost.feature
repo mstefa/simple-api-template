@@ -4,10 +4,9 @@ Feature: Create a new post an save it in the
   I want to save the post's data on the DB
 
   Scenario: Create a new BlogpPost Succesfully
-    Given I send a POST request to "/blogpost" with body:
+    Given I send a POST request to "/blogpost/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
       """
       {
-        "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
         "title": "mstefa",
         "description": "Test1234",
         "body": "matias",

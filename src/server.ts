@@ -8,8 +8,12 @@ import express, { Request, Response } from 'express';
 // import { ValidationError, validationResult } from 'express-validator';
 import * as http from 'http';
 import httpStatus from 'http-status';
-import { CreateBlogPostController } from './BlogPost/controllers/CreateBlogPostController';
+// import { CreateBlogPostController } from './BlogPost/controllers/CreateBlogPostController';
 import { Logger } from './Shared/infrastructure/logger/Logger';
+// import { BlogPostCreator } from './BlogPost/application/BlogPostCreator';
+import { DIC } from './DependecyInjectionContainer';
+// import BlogPostRoutes from './BlogPost/routes';
+import { registerRoutes as registerBlogPostRoutes } from './BlogPost/routes';
 
 // import { MongoClient } from 'mongodb';
 // import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
@@ -22,8 +26,6 @@ export default class Server {
   private port: string;
 
   private httpServer?: http.Server;
-
-  private createBlogPostController: CreateBlogPostController;
 
   constructor(port: string) {
     this.port = port;
@@ -42,17 +44,13 @@ export default class Server {
 
     this.express.use(compress());
 
-    // Dependency inyection
-    // this.mongoClient = MongoClientFactory.createClient({ url: 'mongodb://localhost:27017/mcc' });
-    this.createBlogPostController = new CreateBlogPostController();
+    DIC.DICLoad();
 
     router.get('/status', (req: Request, res: Response) => {
       res.send('server running 💪');
     });
 
-    router.post('/blogpost', async (req: Request, res: Response) => {
-      await this.createBlogPostController.run(req, res);
-    });
+    registerBlogPostRoutes(router);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/ban-types
     router.use((err: Error, req: Request, res: Response, next: Function) => {
@@ -60,8 +58,6 @@ export default class Server {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     });
     this.express.use(router);
-
-    // eslint-disable-next-line
   }
 
   async start(): Promise<void> {
