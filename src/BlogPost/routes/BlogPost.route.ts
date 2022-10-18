@@ -1,16 +1,19 @@
 import { Router, Request, Response } from 'express';
-import { body } from 'express-validator';
-import { validateReqSchema } from '.';
-import { DIC } from '../../DependecyInjectionContainer';
+import { body, param } from 'express-validator';
+import { validateReqSchema } from './';
+import { DIC } from '../../DependencyInjectionContainer';
 
 export const register = (router: Router) => {
   const reqSchema = [
-    body('id').exists().isString(),
-    body('name').exists().isString(),
-    body('duration').exists().isString()
+    param('id').exists().isString(),
+    body('title').exists().isString(),
+    body('description').exists().isString(),
+    body('body').exists().isString(),
+    body('date').exists().isISO8601(), //Date in format ISO8601
+    body('authorEmail').exists().isEmail()
   ];
 
-  router.put('/courses/:id', reqSchema, validateReqSchema, (req: Request, res: Response) =>
+  router.post('/blogpost/:id', reqSchema, validateReqSchema, (req: Request, res: Response) =>
     DIC.createBlogPostController.run(req, res)
   );
 };

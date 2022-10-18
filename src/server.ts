@@ -2,17 +2,12 @@ import { json, urlencoded } from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 import compress from 'compression';
-// import { Controller } from './controllers/Controller';
 import Router from 'express-promise-router';
 import express, { Request, Response } from 'express';
-// import { ValidationError, validationResult } from 'express-validator';
 import * as http from 'http';
 import httpStatus from 'http-status';
-// import { CreateBlogPostController } from './BlogPost/controllers/CreateBlogPostController';
 import { Logger } from './Shared/infrastructure/logger/Logger';
-// import { BlogPostCreator } from './BlogPost/application/BlogPostCreator';
-import { DIC } from './DependecyInjectionContainer';
-// import BlogPostRoutes from './BlogPost/routes';
+import { DIC } from './DependencyInjectionContainer';
 import { registerRoutes as registerBlogPostRoutes } from './BlogPost/routes';
 
 // import { MongoClient } from 'mongodb';
@@ -89,15 +84,3 @@ export default class Server {
     });
   }
 }
-
-// export function validateReqSchema(req: Request, res: Response, next: Function) {
-//   const validationErrors = validationResult(req);
-//   if (validationErrors.isEmpty()) {
-//     return next();
-//   }
-//   const errors = validationErrors.array().map((err: ValidationError) => ({ [err.param]: err.msg }));
-
-//   return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
-//     errors
-//   });
-// }
