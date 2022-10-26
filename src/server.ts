@@ -60,6 +60,7 @@ export default class Server {
       this.httpServer = this.express.listen(this.port, () => {
         Logger.info(` App is running at http://localhost:${this.port}`);
         Logger.info('  Press CTRL-C to stop\n');
+        
         resolve();
       });
     });

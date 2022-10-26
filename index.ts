@@ -8,6 +8,6 @@ try {
   server.start();
 } catch (e) {
   console.error(e);
-  Logger.error(e);
+  Logger.error(e as Error);
   process.exit(1);
 }

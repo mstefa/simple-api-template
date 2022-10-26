@@ -1,25 +1,49 @@
 import { createLogger, format, transports } from 'winston';
-import config from '../../config/appConfig';
+// import  'winston-daily-rotate-file';
+// import appConfig from '../../config/appConfig';
 
 export class Logger {
-  private static WinstonLogger = createLogger({
-    format: format.combine(format.label({ label: config.app.name }), format.timestamp(), format.json()),
-    transports: [new transports.Console()]
+  private static WinstonConsoleLogger = createLogger({
+    format: format.combine(
+      format.colorize(),
+      format.simple()
+    ),
+    transports: [new transports.Console({ level: 'debug' })] 
   });
+  
+// Decoment this lines to create a file logger.
+  // private static WinstonFileLogger = createLogger({
+  //   format: format.combine(
+  //     format.label({ label: appConfig.app.name }),
+  //     format.timestamp(),
+  //     format.json()
+  //   ),
+  //   transports: [
+  //     new winston.transports.DailyRotateFile({
+  //       filename: './logs/application-%DATE%.log',
+  //       datePattern: 'YYYY-MM-DD-HH',
+  //       zippedArchive: true,
+  //       maxSize: '20m',
+  //       maxFiles: '14d',
+
+  //     })
+  //   ]
+  // });
 
   static debug(message: string) {
-    this.WinstonLogger.debug(message);
+    this.WinstonConsoleLogger.log('debug', message);
   }
 
   static info(message: string) {
-    this.WinstonLogger.info(message);
+    this.WinstonConsoleLogger.log('info',message);
   }
 
   static warn(message: string) {
-    this.WinstonLogger.warn(message);
+    this.WinstonConsoleLogger.log('warn',message);
   }
 
-  static error(message: unknown) {
-    this.WinstonLogger.error(message);
+  static error(error: Error) {
+    this.WinstonConsoleLogger.error(`${error.message} :  ${error.stack} `);
+
   }
 }
