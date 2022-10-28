@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { DomainError } from '../domain/errors';
+import DomainError from '../../Shared/Domain/Errors/DomainError';
 
 export abstract class Controller {
   abstract run(req: Request, res: Response): Promise<void>;

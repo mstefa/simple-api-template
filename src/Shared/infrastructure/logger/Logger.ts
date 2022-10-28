@@ -42,8 +42,12 @@ export class Logger {
     this.WinstonConsoleLogger.log('warn',message);
   }
 
-  static error(error: Error) {
-    this.WinstonConsoleLogger.error(`${error.message} :  ${error.stack} `);
+  static error(error: Error | unknown) {
+    if (error instanceof Error ){
+      this.WinstonConsoleLogger.error(`${error?.message} :  ${error.stack} `);
+      return
+    }
+    this.WinstonConsoleLogger.error(error);
 
   }
 }

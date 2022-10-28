@@ -15,7 +15,8 @@
   },
   "include": [
     "src/**/**.ts",
+    // "test/**/**.ts",
     "index.ts"
-  ],
+, "src/Shared/Domain/ValueObjects.ts/Email.ts"  ],
   "exclude": ["node_modules"]
 }

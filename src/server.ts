@@ -77,6 +77,7 @@ export default class Server {
       if (this.httpServer) {
         this.httpServer.close(error => {
           if (error) {
+            Logger.error(error)
             return reject(error);
           }
           return resolve();

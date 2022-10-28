@@ -1,7 +1,7 @@
 import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
 import request from 'supertest';
 import assert from 'assert'
-import Server from '../../../src/server';
+import Server from '../../../../src/server';
 
 
 let application: Server;
