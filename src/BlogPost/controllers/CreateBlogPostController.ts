@@ -19,7 +19,7 @@ export class CreateBlogPostController extends Controller {
     const id = req.params.id;
 
     try {
-      this.blogPostCreator.run({ id, title, description, body, date, authorEmail });
+      await this.blogPostCreator.run({ id, title, description, body, date, authorEmail });
       res.status(httpStatus.OK).send();
     } catch (error) {
       this.errorHandling(error, res);

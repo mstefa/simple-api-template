@@ -12,8 +12,7 @@ export class BlogBody {
   }
   private ensureLength(value: string): void {
     if (value.length < 100) {
-      throw new InvalidArgumentError(`The Blog content <${this.value}> has less than 100
-      characters`);
+      throw new InvalidArgumentError(`The Blog content has less than 100  characters`);
     }
   }
 }

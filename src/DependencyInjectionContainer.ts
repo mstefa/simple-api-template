@@ -1,16 +1,19 @@
 import { BlogPostCreator } from './BlogPost/application/BlogPostCreator';
 import { CreateBlogPostController } from './BlogPost/controllers/CreateBlogPostController';
+import { Logger } from './Shared/infrastructure/logger/Logger';
+import { MongoClientFactory } from './Shared/infrastructure/mongo/MongoClientFactory';
 
-let i = 0;
+const mongoClient = MongoClientFactory.createClient({ url: 'mongodb://localhost:27017/test' });
 const blogPostCreator = new BlogPostCreator();
-console.log(i++);
 const createBlogPostController = new CreateBlogPostController(blogPostCreator);
+
 const DICLoad = () => {
-  console.log('Dependency loaded! ');
+  Logger.info('  Dependency loaded! \n');
 };
 
 export const DIC = {
   DICLoad,
+  mongoClient,
   blogPostCreator,
   createBlogPostController
 };

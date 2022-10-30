@@ -36,7 +36,7 @@ export default class Server {
         credentials: false
       })
     );
-
+    //infrastructure
     this.express.use(compress());
 
     DIC.DICLoad();
@@ -56,14 +56,14 @@ export default class Server {
   }
 
   async start(): Promise<void> {
-    return new Promise(resolve => {
-      this.httpServer = this.express.listen(this.port, () => {
-        Logger.info(` App is running at http://localhost:${this.port}`);
-        Logger.info('  Press CTRL-C to stop\n');
-        
-        resolve();
-      });
+    await (await DIC.mongoClient).db('admin').command({ ping: 1 });
+    Logger.info('  DB Connected \n');
+
+    await this.express.listen(this.port, () => {
+      Logger.info(`  App is running at http://localhost:${this.port}`);
+      Logger.info('  Press CTRL-C to stop\n');
     });
+    return;
   }
 
   getHTTPServer() {
@@ -71,13 +71,13 @@ export default class Server {
   }
 
   async stop(): Promise<void> {
-    // (await this.mongoClient).close();
+    (await DIC.mongoClient).close();
 
     return new Promise((resolve, reject) => {
       if (this.httpServer) {
         this.httpServer.close(error => {
           if (error) {
-            Logger.error(error)
+            Logger.error(error);
             return reject(error);
           }
           return resolve();

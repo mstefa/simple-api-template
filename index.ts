@@ -7,7 +7,6 @@ try {
   const server = new Server(port);
   server.start();
 } catch (e) {
-  console.error(e);
   Logger.error(e);
   process.exit(1);
 }

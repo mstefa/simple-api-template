@@ -27,6 +27,10 @@ Then('the response should be empty', () => {
   assert.deepStrictEqual(_response.body, {});
 });
 
+Then('the body should have a message {string}', (message: string) => {
+  assert.deepStrictEqual(_response.body, {message});
+});
+
 BeforeAll(async () => {
   application = new Server('4000');
   await application.start();
