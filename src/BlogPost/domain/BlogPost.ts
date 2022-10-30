@@ -29,21 +29,21 @@ export class BlogPost extends AggregateRoot {
     };
   }
 
-  static fromPrimitives(plainData: {
-    id: string;
-    title: string;
-    description: string;
-    body: string;
-    date: string;
-    authorEmail: string;
-  }): BlogPost {
+  static fromPrimitives(
+    id: string,
+    title: string,
+    description: string,
+    body: string,
+    date: string,
+    authorEmail: string
+  ): BlogPost {
     return new BlogPost(
-      new Uuid(plainData.id),
-      new BlogTitle(plainData.title),
-      new BlogDescription(plainData.description),
-      new BlogBody(plainData.body),
-      new BlogDate(plainData.date),
-      new Email(plainData.authorEmail)
+      new Uuid(id),
+      new BlogTitle(title),
+      new BlogDescription(description),
+      new BlogBody(body),
+      new BlogDate(date),
+      new Email(authorEmail)
     );
   }
 }

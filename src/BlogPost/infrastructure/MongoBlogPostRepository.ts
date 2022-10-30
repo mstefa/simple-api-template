@@ -4,40 +4,36 @@ import { MongoRepository } from '../../Shared/infrastructure/mongo/MongoReposito
 import { BlogPost } from '../domain/BlogPost';
 import { BlogPostRepository } from '../domain/BlogPostRepository';
 
-class AppDataDocument {
-  constructor(
-    readonly id: string,
-    readonly title: string,
-    readonly description: string,
-    readonly body: string,
-    readonly date: string,
-    readonly authorEmail: string
-  ) {}
-}
-
-  constructor(appData: AppData) {
-    this._id = appData.id;
-    this.metadata = appData.metadata;
-    this.technical_data = appData.technicalData;
-  }
+interface BlogPostDocument {
+  _id: string;
+  title: string;
+  description: string;
+  body: string;
+  date: string;
+  authorEmail: string;
 }
 
 export class MongoBlogPostRepository extends MongoRepository<BlogPost> implements BlogPostRepository {
   protected collectionName(): string {
-    return 'app_data';
+    return 'blog_post';
   }
 
   async save(blogPost: BlogPost): Promise<void> {
-    const collection = await this.collection();
-
-    const document = new AppDataDocument(blogPost);
-
-    await collection.updateOne({ _id: blogPost.id }, { $set: document }, { upsert: true });
+    return this.persist(blogPost.id.value, blogPost);
   }
 
   async search(id: Uuid): Promise<Nullable<BlogPost>> {
     const collection = await this.collection();
-    const document = await collection.findOne<AppDataDocument>({ _id: id });
-    return document ? new BlogPost() : null;
+    const document = await collection.findOne<BlogPostDocument>({ _id: id });
+    return document
+      ? BlogPost.fromPrimitives(
+          document._id,
+          document.title,
+          document.description,
+          document.body,
+          document.date,
+          document.authorEmail
+        )
+      : null;
   }
 }

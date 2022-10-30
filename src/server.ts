@@ -36,7 +36,6 @@ export default class Server {
         credentials: false
       })
     );
-    //infrastructure
     this.express.use(compress());
 
     DIC.DICLoad();
