@@ -15,7 +15,6 @@ export class BlogPostCreator {
     this.repository = repository;
   }
   async run(data: CreateBlogPostRequest): Promise<void> {
-    // console.log(data);
     const blogPost = new BlogPost(
       new Uuid(data.id),
       new BlogTitle(data.title),
@@ -24,6 +23,7 @@ export class BlogPostCreator {
       new BlogDate(data.date),
       new Email(data.authorEmail)
     );
-    this.repository.save(blogPost);
+
+    await this.repository.save(blogPost);
   }
 }
