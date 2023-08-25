@@ -7,7 +7,7 @@ const config = {
     name: 'test-api'
   },
   server: {
-    port: process.env.SERVER_PORT || '5001',
+    port: process.env.SERVER_PORT || '3000',
     host: process.env.SERVER_HOST as string
   },
   bd: {

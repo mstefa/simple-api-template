@@ -11,17 +11,17 @@
   "author": "Matias J Stefanutti",
   "license": "MIT",
   "scripts": {
+    "start": "node dist/index",
     "dev": "nodemon index.ts",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "NODE_ENV=test jest",
     "test:integration": "NODE_ENV=test cucumber-js -p backend",
-    "start": "node dist/index",
-    "build": "npm run build:clean && npm run build:tsc",
-    "build:tsc": "tsc -p tsconfig.json",
-    "build:clean": "rm -r dist; exit 0",
+    "build:clean": "npm run clean && npm run build",
+    "build": "tsc -p tsconfig.json ",
+    "clean": "rm -r dist; exit 0",
     "lint": "eslint src/**/*.ts{,x}",
     "lint-fix": "eslint src/**/*.ts{,x} --fix",
-    "seedDB": "node seedDb.js "
+    "doc:swagger": "node swaggerGenerator.js"
   },
   "dependencies": {
     "@cucumber/cucumber": "^9.4.0",

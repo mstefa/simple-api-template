@@ -15,4 +15,4 @@ console.log(routes)
 const outputFile = './docs/swagger-output.json';
 const endpointsFiles = ['./src/server.ts', './src/BlogPost/routes/BlogPost.route.ts'];
 
-swaggerAutogen(outputFile, routes, doc);gs
+swaggerAutogen(outputFile, routes, doc);

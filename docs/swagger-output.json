@@ -11,8 +11,18 @@
     "http"
   ],
   "paths": {
-    "/blogpost/{id}": {
+    "/blog/article": {
       "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/blog/article/{id}": {
+      "get": {
         "description": "",
         "parameters": [
           {
@@ -22,13 +32,16 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
       }
     },
-    "/status": {
+    "/check-health": {
       "get": {
         "description": "",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
