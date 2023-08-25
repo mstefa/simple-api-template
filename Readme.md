@@ -2,6 +2,15 @@
 
 This template is designed to provide a consistent structure for TypeScript projects for my personal projects.
 
+## Documentation
+
+The `docs` directory contains important documentation for the project:
+
+* `docs/design/`: This section provides a summary of the choices made and assumptions taken during the development process and offers insights into the application's design rationale and model.
+* `docs/requests/request-example.rest`: Example REST API requests that can be executed using the VSCode REST Client extension.
+* `docs/requests/swagger.yaml`: The Swagger API specification file.
+
+
 ## Run project on local
 
 This project requires a MongoDB server. A Docker Compose file is provided to create a Docker container with these dependency. To start the service, run:
@@ -51,11 +60,3 @@ It is possible to launch all test together with
 npm run test
 
 ```
-
-## Documentation
-
-The docs directory contains important documentation for the project:
-
-* `docs/design/`: This section provides an overview of the application's design decisions and model.
-* `docs/requests/request-example.rest`: Example REST API requests that can be executed using the VSCode REST Client extension.
-* `docs/requests/swagger.yaml`: The Swagger API specification file.
