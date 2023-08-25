@@ -1,17 +1,15 @@
 import { json, urlencoded } from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
+import morgan from 'morgan';
 import compress from 'compression';
 import Router from 'express-promise-router';
 import express, { Request, Response } from 'express';
 import * as http from 'http';
 import httpStatus from 'http-status';
-import { Logger } from './Shared/infrastructure/logger/Logger';
-import { DIC } from './DependencyInjectionContainer';
-import { registerRoutes as registerBlogPostRoutes } from './BlogPost/routes';
-
-// import { MongoClient } from 'mongodb';
-// import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
+import { Logger } from './shared/infrastructure/logger/Logger';
+import { DependencyInjectionContainer as DependencyInjectionContainer } from './DependencyInjectionContainer';
+import { registerRoutes as registerArticleRoutes } from './article/routes';
 
 const router = Router();
 
@@ -36,17 +34,20 @@ export default class Server {
         credentials: false
       })
     );
+
+    const morganMiddleware = morgan(':method :url :status :res[content-length] - :response-time ms');
+    this.express.use(morganMiddleware);
+
     this.express.use(compress());
+    // TODO https://www.npmjs.com/package/typed-inject
+    DependencyInjectionContainer.DependencyInjectionContainerLoad();
 
-    DIC.DICLoad();
-
-    router.get('/status', (req: Request, res: Response) => {
+    router.get('/check-health', (req: Request, res: Response) => {
       res.send('server running 💪');
     });
 
-    registerBlogPostRoutes(router);
+    registerArticleRoutes(router);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/ban-types
     router.use((err: Error, req: Request, res: Response, next: Function) => {
       Logger.error(err);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
@@ -55,10 +56,10 @@ export default class Server {
   }
 
   async start(): Promise<void> {
-    await (await DIC.mongoClient).db('admin').command({ ping: 1 });
+    await (await DependencyInjectionContainer.mongoClient).db('admin').command({ ping: 1 });
     Logger.info('  DB Connected \n');
 
-    await this.express.listen(this.port, () => {
+    this.httpServer = await this.express.listen(this.port, () => {
       Logger.info(`  App is running at http://localhost:${this.port}`);
       Logger.info('  Press CTRL-C to stop\n');
     });
@@ -66,11 +67,12 @@ export default class Server {
   }
 
   getHTTPServer() {
-    return this.httpServer;
+    return this.express;
   }
 
   async stop(): Promise<void> {
-    (await DIC.mongoClient).close();
+    Logger.info('  Stopping server\n');
+    (await DependencyInjectionContainer.mongoClient).close();
 
     return new Promise((resolve, reject) => {
       if (this.httpServer) {

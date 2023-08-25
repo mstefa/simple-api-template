@@ -1,8 +1,9 @@
 import { Collection, MongoClient } from 'mongodb';
-import { AggregateRoot } from '../../Domain/AggregateRoot';
+import { AggregateRoot } from '../../domain/AggregateRoot';
+import { Uuid } from '../../domain/value-objects/Uuid';
 
 export abstract class MongoRepository<T extends AggregateRoot> {
-  constructor(private _client: Promise<MongoClient>) {}
+  constructor(private _client: Promise<MongoClient>) { }
 
   protected abstract collectionName(): string;
 
@@ -27,8 +28,9 @@ export abstract class MongoRepository<T extends AggregateRoot> {
   //   await collection.insertOne(document as any);
   // }
 
-  protected async persist(id: string, aggregateRoot: T): Promise<void> {
+  protected async persist(id: Uuid, aggregateRoot: T): Promise<void> {
     const collection = await this.collection();
+    // const _id = new ObjectId(id);
 
     const document = { ...aggregateRoot.toPrimitives(), _id: id, id: undefined };
 

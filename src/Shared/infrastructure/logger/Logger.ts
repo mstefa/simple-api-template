@@ -4,14 +4,11 @@ import { createLogger, format, transports } from 'winston';
 
 export class Logger {
   private static WinstonConsoleLogger = createLogger({
-    format: format.combine(
-      format.colorize(),
-      format.simple()
-    ),
-    transports: [new transports.Console({ level: 'debug' })] 
+    format: format.combine(format.colorize(), format.simple()),
+    transports: [new transports.Console({ level: 'debug' })]
   });
-  
-// Decoment this lines to create a file logger.
+
+  // Decoment this lines to create a file logger.
   // private static WinstonFileLogger = createLogger({
   //   format: format.combine(
   //     format.label({ label: appConfig.app.name }),
@@ -35,19 +32,18 @@ export class Logger {
   }
 
   static info(message: string) {
-    this.WinstonConsoleLogger.log('info',message);
+    this.WinstonConsoleLogger.log('info', message);
   }
 
   static warn(message: string) {
-    this.WinstonConsoleLogger.log('warn',message);
+    this.WinstonConsoleLogger.log('warn', message);
   }
 
   static error(error: Error | unknown) {
-    if (error instanceof Error ){
+    if (error instanceof Error) {
       this.WinstonConsoleLogger.error(`${error?.message} :  ${error.stack} `);
-      return
+      return;
     }
     this.WinstonConsoleLogger.error(error);
-
   }
 }

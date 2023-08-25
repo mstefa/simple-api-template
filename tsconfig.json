@@ -5,18 +5,20 @@
     "target": "es6",
     "noImplicitAny": true,
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "rootDir": ".",
     "strict": true,
     "noEmit": false,
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
   },
   "include": [
     "src/**/**.ts",
-    // "test/**/**.ts",
-    "index.ts"
-, "src/Shared/Domain/ValueObjects.ts/Email.ts"  ],
-  "exclude": ["node_modules"]
+    "index.ts",
+    "src/shared/domain/value-objects"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

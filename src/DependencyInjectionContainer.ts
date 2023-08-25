@@ -1,21 +1,21 @@
-import { BlogPostCreator } from './BlogPost/application/BlogPostCreator';
-import { CreateBlogPostController } from './BlogPost/controllers/CreateBlogPostController';
-import { MongoBlogPostRepository } from './BlogPost/infrastructure/MongoBlogPostRepository';
-import { Logger } from './Shared/infrastructure/logger/Logger';
-import { MongoClientFactory } from './Shared/infrastructure/mongo/MongoClientFactory';
+import { ArticleCreator } from './article/application/ArticleCreator';
+import { PostArticleController } from './article/controllers/PostArticleController';
+import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
+import { Logger } from './shared/infrastructure/logger/Logger';
+import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
 
 const mongoClient = MongoClientFactory.createClient({ url: 'mongodb://localhost:27017/test' });
-const blogPostRepository = new MongoBlogPostRepository(mongoClient);
-const blogPostCreator = new BlogPostCreator(blogPostRepository);
-const createBlogPostController = new CreateBlogPostController(blogPostCreator);
+const articleRepository = new MongoArticleRepository(mongoClient);
+const articleCreator = new ArticleCreator(articleRepository);
+const createArticleController = new PostArticleController(articleCreator);
 
-const DICLoad = () => {
+const DependencyInjectionContainerLoad = () => {
   Logger.info('  Dependency loaded! \n');
 };
 
-export const DIC = {
-  DICLoad,
+export const DependencyInjectionContainer = {
+  DependencyInjectionContainerLoad,
   mongoClient,
-  blogPostCreator,
-  createBlogPostController
+  ArticleCreator: articleCreator,
+  createArticleController
 };
