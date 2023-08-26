@@ -4,7 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import compress from 'compression';
 import Router from 'express-promise-router';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import * as http from 'http';
 import httpStatus from 'http-status';
 import { Logger } from './shared/infrastructure/logger/Logger';
@@ -42,13 +42,14 @@ export default class Server {
     // TODO https://www.npmjs.com/package/typed-inject
     DependencyInjectionContainer.DependencyInjectionContainerLoad();
 
-    router.get('/check-health', (req: Request, res: Response) => {
+    router.get('/check-health', async (req: Request, res: Response) => {
       res.send('server running 💪');
     });
 
     registerArticleRoutes(router);
 
-    router.use((err: Error, req: Request, res: Response, next: Function) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    router.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
       Logger.error(err);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     });
@@ -56,8 +57,12 @@ export default class Server {
   }
 
   async start(): Promise<void> {
+    Logger.info('  Connecting to DB... \n');
+    await (await DependencyInjectionContainer.mongoClient).connect();
+    Logger.info('  checking DB connection... \n');
+
     await (await DependencyInjectionContainer.mongoClient).db('admin').command({ ping: 1 });
-    Logger.info('  DB Connected \n');
+    Logger.info('  DB Connected! \n');
 
     this.httpServer = await this.express.listen(this.port, () => {
       Logger.info(`  App is running at http://localhost:${this.port}`);
@@ -71,16 +76,20 @@ export default class Server {
   }
 
   async stop(): Promise<void> {
-    Logger.info('  Stopping server\n');
+    Logger.info('  Closing DB connection...\n');
     (await DependencyInjectionContainer.mongoClient).close();
 
+    Logger.info('  DB connection Close\n');
+
     return new Promise((resolve, reject) => {
+      Logger.info('  stopping http server... \n');
       if (this.httpServer) {
         this.httpServer.close(error => {
           if (error) {
             Logger.error(error);
             return reject(error);
           }
+          Logger.info('  Server stopped \n');
           return resolve();
         });
       }
