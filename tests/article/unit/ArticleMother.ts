@@ -29,7 +29,6 @@ export class ArticleMother {
   }
 
   static givenEmail = (email: Email): Article => {
-
     const article = new Article(
       new Uuid(UuidMother.random()),
       new ArticleTitle(WordMother.random()),

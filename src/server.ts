@@ -1,15 +1,16 @@
 import { json, urlencoded } from 'body-parser';
-import helmet from 'helmet';
-import cors from 'cors';
-import morgan from 'morgan';
 import compress from 'compression';
-import Router from 'express-promise-router';
+import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
+import Router from 'express-promise-router';
+import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
-import { Logger } from './shared/infrastructure/logger/Logger';
-import { DependencyInjectionContainer as DependencyInjectionContainer } from './DependencyInjectionContainer';
+import morgan from 'morgan';
+
 import { registerRoutes as registerArticleRoutes } from './article/routes';
+import { DependencyInjectionContainer as DependencyInjectionContainer } from './DependencyInjectionContainer';
+import { Logger } from './shared/infrastructure/logger/Logger';
 
 const router = Router();
 
@@ -48,7 +49,7 @@ export default class Server {
 
     registerArticleRoutes(router);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
     router.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
       Logger.error(err);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
@@ -68,6 +69,7 @@ export default class Server {
       Logger.info(`  App is running at http://localhost:${this.port}`);
       Logger.info('  Press CTRL-C to stop\n');
     });
+
     return;
   }
 
@@ -87,9 +89,11 @@ export default class Server {
         this.httpServer.close(error => {
           if (error) {
             Logger.error(error);
+
             return reject(error);
           }
           Logger.info('  Server stopped \n');
+
           return resolve();
         });
       }

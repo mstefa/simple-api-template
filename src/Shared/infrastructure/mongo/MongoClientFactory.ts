@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+
 import MongoConfig from './MongoConfig';
 
 export class MongoClientFactory {

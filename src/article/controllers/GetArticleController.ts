@@ -1,6 +1,8 @@
-import { Controller } from './Controller';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+
+import { Controller } from './Controller';
+
 type AppPatchRequest = Request & {
   body: AppPatchRequest;
 };

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+
 import DomainError from '../../shared/domain/Errors/DomainError';
 import { Logger } from '../../shared/infrastructure/logger/Logger';
 

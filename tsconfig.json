@@ -16,7 +16,6 @@
   "include": [
     "src/**/**.ts",
     "index.ts",
-    "src/shared/domain/value-objects"
   ],
   "exclude": [
     "node_modules"

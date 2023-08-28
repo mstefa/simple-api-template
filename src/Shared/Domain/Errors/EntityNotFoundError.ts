@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+
 import DomainError from './DomainError';
 
 export class EntityNotFoundError extends DomainError {

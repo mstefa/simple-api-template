@@ -42,6 +42,7 @@ export class Logger {
   static error(error: Error | unknown) {
     if (error instanceof Error) {
       this.WinstonConsoleLogger.error(`${error?.message} :  ${error.stack} `);
+
       return;
     }
     this.WinstonConsoleLogger.error(error);

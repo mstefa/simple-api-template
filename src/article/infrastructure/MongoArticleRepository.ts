@@ -25,6 +25,7 @@ export class MongoArticleRepository extends MongoRepository<Article> implements 
   async search(id: Uuid): Promise<Nullable<Article>> {
     const collection = await this.collection();
     const document = await collection.findOne<ArticleDocument>({ _id: id });
+
     return document
       ? Article.fromPrimitives(
         document._id,

@@ -1,6 +1,6 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import { globSync } from 'glob';
+import { NextFunction,Request, Response, Router } from 'express';
 import { ValidationError, validationResult } from 'express-validator';
+import { globSync } from 'glob';
 import httpStatus from 'http-status';
 
 async function register(routePath: string, router: Router) {

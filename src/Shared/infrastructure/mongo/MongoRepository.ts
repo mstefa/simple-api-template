@@ -1,4 +1,5 @@
 import { Collection, MongoClient } from 'mongodb';
+
 import { AggregateRoot } from '../../domain/AggregateRoot';
 import { Uuid } from '../../domain/value-objects/Uuid';
 

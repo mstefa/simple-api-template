@@ -1,8 +1,9 @@
-import { Controller } from './Controller';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { ArticleCreator } from '../application/ArticleCreator';
+
 import { Logger } from '../../shared/infrastructure/logger/Logger';
+import { ArticleCreator } from '../application/ArticleCreator';
+import { Controller } from './Controller';
 
 type AppPostRequest = Request & {
   body: AppPostRequest;

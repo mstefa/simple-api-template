@@ -1,7 +1,8 @@
 import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
+import * as assert from 'assert'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import supertest from 'supertest';
-import * as assert from 'assert'
+
 import Server from '../../../../src/server';
 
 let application: Server;
@@ -35,10 +36,8 @@ Then('the body should have a message {string}', (message: string) => {
 BeforeAll(async () => {
   application = new Server('4000');
   await application.start();
-  console.log('ok for testign')
 });
 
 AfterAll(async () => {
   await application.stop();
-  console.log('STOP')
 });

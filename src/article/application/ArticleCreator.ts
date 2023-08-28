@@ -14,6 +14,7 @@ export class ArticleCreator {
   constructor(repository: ArticleRepository) {
     this.repository = repository;
   }
+
   async run(data: CreateArticleRequest): Promise<void> {
     const blogPost = new Article(
       new Uuid(data.id),

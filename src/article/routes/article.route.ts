@@ -1,7 +1,8 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response,Router } from 'express';
 import { body, param } from 'express-validator';
-import { validateReqSchema } from '.';
+
 import { DependencyInjectionContainer } from '../../DependencyInjectionContainer';
+import { validateReqSchema } from '.';
 
 export const register = (router: Router) => {
   // TODO: add validator https://www.npmjs.com/package/zod

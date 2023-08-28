@@ -4,6 +4,7 @@ import { Nullable } from '../../../src/shared/domain/Nullable';
 import { Email } from '../../../src/shared/domain/value-objects/Email';
 import { Uuid } from '../../../src/shared/domain/value-objects/Uuid';
 import { ArticleMother } from '../unit/ArticleMother';
+
 export class ArticleRepositoryMock implements ArticleRepository {
 
   private mockSave = jest.fn();
@@ -12,12 +13,14 @@ export class ArticleRepositoryMock implements ArticleRepository {
     this.mockSave(user);
   }
 
-  search(id: Uuid): Promise<Nullable<Article>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  search(_id: Uuid): Promise<Nullable<Article>> {
     throw new Error('Method not implemented.');
   }
 
   searchByEmail(email: Email): Promise<Nullable<Article>> {
     const mockArticle = ArticleMother.givenEmail(email);
+
     return Promise.resolve(mockArticle);
   }
 
