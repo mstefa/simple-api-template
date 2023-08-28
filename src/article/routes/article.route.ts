@@ -1,4 +1,4 @@
-import { Request, Response,Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { body, param } from 'express-validator';
 
 import { DependencyInjectionContainer } from '../../DependencyInjectionContainer';
@@ -22,7 +22,7 @@ export const register = (router: Router) => {
     DependencyInjectionContainer.createArticleController.run(req, res)
   );
 
-  router.get('/blog/article/{id}', reqGetArticleSchema, validateReqSchema, (req: Request, res: Response) =>
-    DependencyInjectionContainer.createArticleController.run(req, res)
+  router.get('/blog/article/:id', reqGetArticleSchema, validateReqSchema, (req: Request, res: Response) =>
+    DependencyInjectionContainer.getBlogPostController.run(req, res)
   );
 };

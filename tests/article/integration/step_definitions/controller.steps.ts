@@ -13,7 +13,6 @@ let _response: supertest.Response;
 
 Given('I send a GET request to {string}', (route: string) => {
   _request = supertest(application.getHTTPServer()).get(route)
-  // request(application.getHTTPServer()).get(route);
 });
 
 Given('I send a POST request to {string} with body:', (route: string, bodyData: string) => {
@@ -31,6 +30,11 @@ Then('the response should be empty', () => {
 
 Then('the body should have a message {string}', (message: string) => {
   assert.deepStrictEqual(_response.body, { message });
+});
+
+Then('the response should have a payload:', (payload: string) => {
+  const expected = JSON.parse(payload)
+  assert.deepStrictEqual(_response.body, expected);
 });
 
 BeforeAll(async () => {

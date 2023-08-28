@@ -1,3 +1,4 @@
+### Create an article
 POST http://localhost:3000/blog/article HTTP/1.1
 content-type: application/json
 
@@ -9,3 +10,7 @@ content-type: application/json
     "date": "2022-10-18T06:14:02.355Z",
     "authorEmail": "mstefanutti24@gmail.com"
   }
+
+
+### Obtain an article
+GET http://localhost:3000/blog/article/id HTTP/1.1

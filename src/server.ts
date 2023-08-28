@@ -2,6 +2,7 @@ import { json, urlencoded } from 'body-parser';
 import compress from 'compression';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
+import expressListRoutes from 'express-list-routes';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
@@ -54,6 +55,7 @@ export default class Server {
       Logger.error(err);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     });
+
     this.express.use(router);
   }
 
@@ -66,6 +68,13 @@ export default class Server {
     Logger.info('  DB Connected! \n');
 
     this.httpServer = await this.express.listen(this.port, () => {
+      Logger.info(`  Routes loaded:`);
+
+      expressListRoutes(this.express, { prefix: '' });
+
+      Logger.info(`\n`);
+
+
       Logger.info(`  App is running at http://localhost:${this.port}`);
       Logger.info('  Press CTRL-C to stop\n');
     });
