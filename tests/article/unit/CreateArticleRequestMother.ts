@@ -11,7 +11,7 @@ export class CreateArticleRequestMother {
   static random = (): CreateArticleRequest => {
 
     const request = {
-      id: UuidMother.random(),
+      id: UuidMother.random().value,
       title: WordMother.random(),
       description: SentenceMother.random(),
       body: LongTextMother.byNumberOfParagraphs(10),
@@ -25,7 +25,7 @@ export class CreateArticleRequestMother {
   static futureDate = (): CreateArticleRequest => {
 
     const request = {
-      id: UuidMother.random(),
+      id: UuidMother.random().value,
       title: WordMother.random(),
       description: SentenceMother.random(),
       body: LongTextMother.byNumberOfParagraphs(10),
@@ -39,7 +39,7 @@ export class CreateArticleRequestMother {
   static wrongEmail = (): CreateArticleRequest => {
 
     const request = {
-      id: UuidMother.random(),
+      id: UuidMother.random().value,
       title: WordMother.random(),
       description: SentenceMother.random(),
       body: LongTextMother.byNumberOfParagraphs(10),
@@ -53,7 +53,7 @@ export class CreateArticleRequestMother {
   static tooShortTitle = (): CreateArticleRequest => {
 
     const request = {
-      id: UuidMother.random(),
+      id: UuidMother.random().value,
       title: "a",
       description: SentenceMother.random(),
       body: LongTextMother.byNumberOfParagraphs(10),

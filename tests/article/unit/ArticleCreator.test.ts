@@ -1,5 +1,6 @@
 import { ArticleCreator } from '../../../src/article/application/ArticleCreator'
 import { ArticleRepositoryMock } from '../mocks/ArticleRepositoryMock';
+import { ArticleMother } from './ArticleMother';
 import { CreateArticleRequestMother } from './CreateArticleRequestMother';
 
 let articleRepositoryMock: ArticleRepositoryMock;
@@ -15,7 +16,9 @@ describe('Create a Blog Post', () => {
 
     const blogPostRequest = CreateArticleRequestMother.random();
     await articleCreator.run(blogPostRequest)
-
+    articleRepositoryMock.assertLastSavedArticleIs(
+      ArticleMother.fromRequest(blogPostRequest)
+    );
   })
 
   it('Should throw an error if the Blog Post Date is not a past date', async () => {

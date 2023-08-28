@@ -8,7 +8,7 @@ export const register = (router: Router) => {
   // TODO: add validator https://www.npmjs.com/package/zod
 
   const reqPostArticleSchema = [
-    body('id').exists().isString(),
+    body('id').exists().isUUID(),
     body('title').exists().isString(),
     body('description').exists().isString(),
     body('body').exists().isString(),
@@ -16,7 +16,7 @@ export const register = (router: Router) => {
     body('authorEmail').exists().isEmail()
   ];
 
-  const reqGetArticleSchema = [param('id').exists().isString()];
+  const reqGetArticleSchema = [param('id').exists().isUUID()];
 
   router.post('/blog/article', reqPostArticleSchema, validateReqSchema, (req: Request, res: Response) =>
     DependencyInjectionContainer.createArticleController.run(req, res)

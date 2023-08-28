@@ -1,5 +1,5 @@
-import { NextFunction,Request, Response, Router } from 'express';
-import { ValidationError, validationResult } from 'express-validator';
+import { NextFunction, Request, Response, Router } from 'express';
+import { validationResult } from 'express-validator';
 import { globSync } from 'glob';
 import httpStatus from 'http-status';
 
@@ -18,9 +18,6 @@ export function validateReqSchema(req: Request, res: Response, next: NextFunctio
   if (validationErrors.isEmpty()) {
     return next();
   }
-  const errors = validationErrors.array().map((err: ValidationError) => ({ [err.type]: err.msg }));
 
-  return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
-    errors
-  });
+  return res.status(httpStatus.UNPROCESSABLE_ENTITY).json(validationErrors.array());
 }
