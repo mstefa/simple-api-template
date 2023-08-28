@@ -13,4 +13,4 @@ content-type: application/json
 
 
 ### Obtain an article
-GET http://localhost:3000/blog/article/id HTTP/1.1
+GET http://localhost:3000/blog/article/ef8ac118-8d7f-49cc-abec-78e0d05af80a HTTP/1.1
