@@ -21,17 +21,9 @@ export abstract class MongoRepository<T extends AggregateRoot> {
     await collection.drop();
   }
 
-  // protected async insert(id: string, aggregateRoot: T): Promise<void> {
-  //   const collection = await this.collection();
-
-  //   const document = { ...aggregateRoot.toPrimitives(), _id: id, id: undefined };
-
-  //   await collection.insertOne(document as any);
-  // }
 
   protected async persist(id: Uuid, aggregateRoot: T): Promise<void> {
     const collection = await this.collection();
-    // const _id = new ObjectId(id);
 
     const document = { ...aggregateRoot.toPrimitives(), _id: id, id: undefined };
 

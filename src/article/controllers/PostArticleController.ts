@@ -3,25 +3,27 @@ import httpStatus from 'http-status';
 
 import { Logger } from '../../shared/infrastructure/logger/Logger';
 import { ArticleCreator } from '../application/ArticleCreator';
+import { Article } from '../domain/Article';
 import { Controller } from './Controller';
 
-type AppPostRequest = Request & {
-  body: AppPostRequest;
+type ArticleRequest = Request & {
+  body: Article;
 };
 
-export class PostArticleController extends Controller {
-  private blogPostCreator: ArticleCreator;
+export class ArticleController extends Controller {
+  private articleCreator: ArticleCreator;
+
   constructor(blogPostCreator: ArticleCreator) {
     super();
-    this.blogPostCreator = blogPostCreator;
+    this.articleCreator = blogPostCreator;
   }
 
-  async run(req: AppPostRequest, res: Response) {
+  async run(req: ArticleRequest, res: Response) {
     const { id, title, description, body, date, authorEmail } = req.body;
     Logger.info(`request recibed in ${req.path}`);
 
     try {
-      await this.blogPostCreator.run({ id, title, description, body, date, authorEmail });
+      await this.articleCreator.run({ id, title, description, body, date, authorEmail });
       res.status(httpStatus.OK).send();
     } catch (error) {
       this.errorHandling(error, res);

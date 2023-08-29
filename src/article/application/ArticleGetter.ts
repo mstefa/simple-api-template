@@ -1,7 +1,7 @@
 import { EntityNotFoundError } from "../../shared/domain/Errors/EntityNotFoundError";
 import { Uuid } from "../../shared/domain/value-objects/Uuid";
-import { Article } from "../domain/Article";
 import { ArticleRepository } from "../domain/ArticleRepository";
+import { ArticleDto } from "../dtos/ArticleDto";
 
 export class ArticleGetter {
   private repository: ArticleRepository;
@@ -10,11 +10,12 @@ export class ArticleGetter {
     this.repository = repository;
   }
 
-  async run(id: Uuid): Promise<Article> {
-    const article = await this.repository.search(id)
+  async run(id: string): Promise<ArticleDto> {
+
+    const article = await this.repository.search(new Uuid(id))
 
     if (article !== null) {
-      return article;
+      return article.toPrimitives();
     }
 
     throw new EntityNotFoundError(`Article with ID: ${id} can not be found`)

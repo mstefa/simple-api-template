@@ -1,6 +1,7 @@
 import { AggregateRoot } from '../../shared/domain/AggregateRoot';
 import { Email } from '../../shared/domain/value-objects/Email';
 import { Uuid } from '../../shared/domain/value-objects/Uuid';
+import { ArticleDto } from '../dtos/ArticleDto';
 import { ArticleBody } from './value-objects/ArticleBody';
 import { ArticleDate } from './value-objects/ArticleDate';
 import { ArticleDescription } from './value-objects/ArticleDescription';
@@ -18,13 +19,13 @@ export class Article extends AggregateRoot {
     super();
   }
 
-  toPrimitives() {
+  toPrimitives(): ArticleDto {
     return {
       id: this.id.value,
       title: this.title.value,
       description: this.description.value,
       body: this.body.value,
-      date: this.date.value,
+      date: this.date.toString(),
       authorEmail: this.authorEmail.value
     };
   }

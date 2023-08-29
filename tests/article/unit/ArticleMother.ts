@@ -4,9 +4,7 @@ import { ArticleBody } from '../../../src/article/domain/value-objects/ArticleBo
 import { ArticleDate } from '../../../src/article/domain/value-objects/ArticleDate';
 import { ArticleDescription } from '../../../src/article/domain/value-objects/ArticleDescription';
 import { ArticleTitle } from '../../../src/article/domain/value-objects/ArticleTitle';
-import { CreateArticleRequest } from '../../../src/article/dtos/CreateArticleRequest';
 import { Email } from '../../../src/shared/domain/value-objects/Email';
-import { Uuid } from '../../../src/shared/domain/value-objects/Uuid';
 import { DateMother } from '../../shared/data-generator/DateMother';
 import { EmailMother } from '../../shared/data-generator/EmailMother';
 import { LongTextMother } from '../../shared/data-generator/LongTextMother';
@@ -41,20 +39,20 @@ export class ArticleMother {
 
     return article
   }
+  // TODO
+  // static fromRequest = (articleRequest: Article): Article => {
 
-  static fromRequest = (articleRequest: CreateArticleRequest): Article => {
+  //   const article = new Article(
+  //     new Uuid(articleRequest.id),
+  //     new ArticleTitle(articleRequest.title),
+  //     new ArticleDescription(articleRequest.description),
+  //     new ArticleBody(articleRequest.body),
+  //     new ArticleDate(articleRequest.date),
+  //     new Email(articleRequest.authorEmail)
+  //   )
 
-    const article = new Article(
-      new Uuid(articleRequest.id),
-      new ArticleTitle(articleRequest.title),
-      new ArticleDescription(articleRequest.description),
-      new ArticleBody(articleRequest.body),
-      new ArticleDate(articleRequest.date),
-      new Email(articleRequest.authorEmail)
-    )
-
-    return article
-  }
+  //   return article
+  // }
 
 }
 

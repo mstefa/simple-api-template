@@ -12,10 +12,10 @@ describe('Create a Blog Post', () => {
     const mokedArticle = ArticleMother.random();
     articleRepositoryMock.returnOnSearch(mokedArticle)
 
-    const received = await articleGetter.run(mokedArticle.id)
+    const received = await articleGetter.run(mokedArticle.id.value)
 
     articleRepositoryMock.assertSearch(mokedArticle.id)
-    expect(received).toEqual(mokedArticle)
+    expect(received).toEqual(mokedArticle.toPrimitives())
 
   })
 })

@@ -6,7 +6,7 @@ import { ArticleBody } from '../domain/value-objects/ArticleBody';
 import { ArticleDate } from '../domain/value-objects/ArticleDate';
 import { ArticleDescription } from '../domain/value-objects/ArticleDescription';
 import { ArticleTitle } from '../domain/value-objects/ArticleTitle';
-import { CreateArticleRequest } from '../dtos/CreateArticleRequest';
+import { ArticleDto } from '../dtos/ArticleDto';
 
 export class ArticleCreator {
   private repository: ArticleRepository;
@@ -15,7 +15,7 @@ export class ArticleCreator {
     this.repository = repository;
   }
 
-  async run(data: CreateArticleRequest): Promise<void> {
+  async run(data: ArticleDto): Promise<void> {
     const blogPost = new Article(
       new Uuid(data.id),
       new ArticleTitle(data.title),

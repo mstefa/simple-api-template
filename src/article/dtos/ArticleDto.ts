@@ -1,4 +1,4 @@
-export type CreateArticleRequest = {
+export type ArticleDto = {
   id: string;
   title: string;
   description: string;
