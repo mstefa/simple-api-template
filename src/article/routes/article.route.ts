@@ -1,11 +1,13 @@
 import { Request, Response, Router } from 'express';
 import { body, param } from 'express-validator';
 
-import { DependencyInjectionContainer } from '../../DependencyInjectionContainer';
+import { DependencyContainer } from '../../DependencyInjectionContainer';
 import { validateReqSchema } from '.';
 
 export const register = (router: Router) => {
   // TODO: add validator https://www.npmjs.com/package/zod
+
+  const DIContainer = DependencyContainer.getInstance();
 
   const reqPostArticleSchema = [
     body('id').exists().isUUID(),
@@ -19,10 +21,10 @@ export const register = (router: Router) => {
   const reqGetArticleSchema = [param('id').exists().isUUID()];
 
   router.post('/blog/article', reqPostArticleSchema, validateReqSchema, (req: Request, res: Response) =>
-    DependencyInjectionContainer.createArticleController.run(req, res)
+    DIContainer.createArticleController.run(req, res)
   );
 
   router.get('/blog/article/:id', reqGetArticleSchema, validateReqSchema, (req: Request, res: Response) =>
-    DependencyInjectionContainer.getBlogPostController.run(req, res)
+    DIContainer.getBlogPostController.run(req, res)
   );
 };

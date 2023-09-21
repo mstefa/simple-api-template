@@ -2,19 +2,36 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const config = {
+interface AppConfig {
   app: {
-    name: 'test-api'
+    name: string;
+    env: string;
+  };
+  server: {
+    port: number;
+    host?: string;
+  };
+  db: {
+    host: string;
+    user: string;
+    pass: string;
+  };
+}
+
+const config: AppConfig = {
+  app: {
+    name: 'test-api',
+    env: process.env.NODE_ENV || 'prod'
   },
   server: {
-    port: process.env.SERVER_PORT || '3000',
+    port: parseInt(process.env.SERVER_PORT || '3000'),
     host: process.env.SERVER_HOST as string
   },
-  bd: {
-    host: process.env.BD_HOST,
-    user: process.env.BD_USER,
-    pass: process.env.BD_PWD
+  db: {
+    host: process.env.BD_HOST || 'mongodb://0.0.0.0:27017',
+    user: process.env.BD_USER || '',
+    pass: process.env.BD_PWD || '',
   }
 };
 
-export default config;
+export { AppConfig, config };

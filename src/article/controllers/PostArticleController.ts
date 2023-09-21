@@ -10,7 +10,7 @@ type ArticleRequest = Request & {
   body: Article;
 };
 
-export class ArticleController extends Controller {
+export class PostArticleController extends Controller {
   private articleCreator: ArticleCreator;
 
   constructor(blogPostCreator: ArticleCreator) {
