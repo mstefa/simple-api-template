@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
-import DomainError from '../../shared/domain/Errors/DomainError';
-import { Logger } from '../../shared/infrastructure/logger/Logger';
+import DomainError from '../domain/Errors/DomainError';
+import { Logger } from './logger/Logger';
 
 export abstract class Controller {
   abstract run(req: Request, res: Response): Promise<void>;

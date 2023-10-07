@@ -5,36 +5,10 @@ import { ArticleGetter } from './article/application/ArticleGetter';
 import { GetBlogPostController } from './article/controllers/GetArticleController';
 import { PostArticleController } from './article/controllers/PostArticleController';
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
+import { PostProduct } from './product/controller/PostProduct';
 import { config } from './shared/config/appConfig';
 import { Logger } from './shared/infrastructure/logger/Logger';
 import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
-
-// DB
-// const mongoClient = MongoClientFactory.createClient({ url: 'mongodb://localhost:27017/test' });
-// const articleRepository = new MongoArticleRepository(mongoClient);
-
-// //Aplication
-// const articleCreator = new ArticleCreator(articleRepository);
-// const articleGetter = new ArticleGetter(articleRepository);
-
-
-// // Controllers
-// const createArticleController = new PostArticleController(articleCreator);
-// const getBlogPostController = new GetBlogPostController(articleGetter)
-
-// const DependencyInjectionContainerLoad = () => {
-//   Logger.info('  Dependency loaded! \n');
-// };
-
-// export const DependencyInjectionContainer = {
-//   DependencyInjectionContainerLoad,
-//   mongoClient,
-//   ArticleCreator: articleCreator,
-//   createArticleController,
-//   getBlogPostController,
-//   articleGetter
-// };
-
 
 export class DependencyContainer {
 
@@ -58,6 +32,8 @@ export class DependencyContainer {
   // public getMetricsController: GetMetricsController;
   public createArticleController: PostArticleController;
   public getBlogPostController: GetBlogPostController;
+  public postProduct: PostProduct;
+
 
 
   constructor() {
@@ -76,6 +52,7 @@ export class DependencyContainer {
     // Controllers
     this.createArticleController = new PostArticleController(this.articleCreator);
     this.getBlogPostController = new GetBlogPostController(this.articleGetter)
+    this.postProduct = new PostProduct();
 
     Logger.info(`  Environment stetted as: ${config.app.env}`)
     Logger.info('  Dependency loaded! \n');

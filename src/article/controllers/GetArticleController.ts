@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
+import { Controller } from '../../shared/infrastructure/Controller';
 import { Logger } from '../../shared/infrastructure/logger/Logger';
 import { ArticleGetter } from '../application/ArticleGetter';
-import { Controller } from './Controller';
 
 
 export class GetBlogPostController extends Controller {

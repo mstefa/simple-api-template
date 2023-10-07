@@ -9,8 +9,8 @@ import * as http from 'http';
 import httpStatus from 'http-status';
 import morgan from 'morgan';
 
-import { registerRoutes as registerArticleRoutes } from './article/routes';
 import { DependencyContainer } from './DependencyInjectionContainer';
+import { registerRoutes as registerArticleRoutes } from './routes';
 import { Logger } from './shared/infrastructure/logger/Logger';
 
 const router = Router();
