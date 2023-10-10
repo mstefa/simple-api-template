@@ -18,13 +18,13 @@ const router = Router();
 export default class Server {
   private express: express.Express;
 
-  private port: string;
+  private port: number;
 
   private httpServer?: http.Server;
 
   private DIContainer: DependencyContainer;
 
-  constructor(port: string) {
+  constructor(port: number) {
     this.port = port;
     this.express = express();
     this.express.use(json());

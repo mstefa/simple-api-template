@@ -14,6 +14,7 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
   }
 
   async save(object: Product): Promise<void> {
+    console.log(object)
     throw new Error('method not implemented')
     // return this.persist(blogPost.id, blogPost);
   }
@@ -21,7 +22,7 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
   async search(id: Uuid): Promise<Nullable<Product>> {
     const collection = await this.collection();
     const document = await collection.findOne<ProductDocument>({ _id: id });
-
+    console.log(document)
     throw new Error('method not implemented')
 
     //	return document

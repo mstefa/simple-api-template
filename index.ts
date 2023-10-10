@@ -1,6 +1,7 @@
 import Server from './src/server';
-import config from './src/shared/config/appConfig';
+import { config } from './src/shared/config/appConfig';
 import { Logger } from './src/shared/infrastructure/logger/Logger';
+
 const port = config.server.port;
 
 try {
