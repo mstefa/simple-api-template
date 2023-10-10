@@ -9,8 +9,8 @@ import * as http from 'http';
 import httpStatus from 'http-status';
 import morgan from 'morgan';
 
-import { registerRoutes as registerArticleRoutes } from './article/routes';
 import { DependencyContainer } from './DependencyInjectionContainer';
+import { registerRoutes as registerArticleRoutes } from './routes';
 import { Logger } from './shared/infrastructure/logger/Logger';
 
 const router = Router();
@@ -18,13 +18,13 @@ const router = Router();
 export default class Server {
   private express: express.Express;
 
-  private port: string;
+  private port: number;
 
   private httpServer?: http.Server;
 
   private DIContainer: DependencyContainer;
 
-  constructor(port: string) {
+  constructor(port: number) {
     this.port = port;
     this.express = express();
     this.express.use(json());

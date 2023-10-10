@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { body, param } from 'express-validator';
 
-import { DependencyContainer } from '../../DependencyInjectionContainer';
+import { DependencyContainer } from '../DependencyInjectionContainer';
 import { validateReqSchema } from '.';
 
 export const register = (router: Router) => {

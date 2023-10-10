@@ -9,7 +9,7 @@ async function register(routePath: string, router: Router) {
 }
 
 export function registerRoutes(router: Router) {
-  const routes = globSync(`${__dirname}/**/*.route.*`);
+  const routes = globSync(`${__dirname}/**/*.routes.*`);
   routes.map((route: string) => register(route, router));
 }
 
