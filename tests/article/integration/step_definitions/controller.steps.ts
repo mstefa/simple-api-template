@@ -38,7 +38,7 @@ Then('the response should have a payload:', (payload: string) => {
 });
 
 BeforeAll(async () => {
-  application = new Server('4000');
+  application = new Server(4000);
   await application.start();
 });
 

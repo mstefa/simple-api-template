@@ -1,3 +1,5 @@
+import { ProductDto } from "../dtos/ProductDto";
+
 export class ProductCreator {
   //private repository: Repository;
 
@@ -5,7 +7,7 @@ export class ProductCreator {
     //this.repository = repository;
   }
 
-  async run(): Promise<void> {
-    console.log('hello')
+  async run(data: ProductDto): Promise<void> {
+    console.log(data)
   }
 }
