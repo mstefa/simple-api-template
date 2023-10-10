@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -38,4 +37,4 @@ jobs:
       - name: npm test
         run: |
           npm testif-present
-    - run: npm test
+      - run: npm test
