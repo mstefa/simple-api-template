@@ -1,10 +1,10 @@
 import { InvalidArgumentError } from '../../../shared/domain/errors/InvalidArgumentError';
 
 export class ProductImage {
-  readonly value: URL;
+  readonly value: string;
   constructor(value: string) {
     try {
-      this.value = new URL(value);
+      this.value = new URL(value).href;
     } catch (_) {
       throw new InvalidArgumentError(`The ProductImage <${value}> is an Invalid URL`
       )
@@ -12,7 +12,7 @@ export class ProductImage {
   }
 
   toString(): string {
-    return this.value.href;
+    return this.value;
   }
 
 }

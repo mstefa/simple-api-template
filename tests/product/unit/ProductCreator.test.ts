@@ -1,4 +1,5 @@
 import { ProductCreator } from '../../../src/product/application/ProductCreator'
+import { ProductMother } from './ProductMother';
 
 let productCreator: ProductCreator;
 
@@ -9,7 +10,8 @@ beforeEach(() => {
 describe('Product Creator', () => {
   it('Create a new product successfully', async () => {
 
-    productCreator.run()
+    const product = ProductMother.random()
+    productCreator.run(product.toPrimitives())
 
   })
 

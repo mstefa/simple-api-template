@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -36,5 +36,5 @@ jobs:
           docker-compose up -d
       - name: npm test
         run: |
-          npm testif-present
+          npm test --if-present
       - run: npm test
