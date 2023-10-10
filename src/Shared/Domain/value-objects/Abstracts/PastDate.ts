@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '../../Errors/InvalidArgumentError';
+import { InvalidArgumentError } from '../../errors/InvalidArgumentError';
 
 export abstract class PastDate {
   readonly value: Date;

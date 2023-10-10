@@ -1,6 +1,9 @@
 import { InvalidArgumentError } from '../../../shared/domain/errors/InvalidArgumentError';
 
-export class ArticleBody {
+const MIN_LENGTH = 1;
+const MAX_LENGTH = 50;
+
+export class ProductTitle {
   readonly value: string;
   constructor(value: string) {
     this.ensureLength(value);
@@ -12,8 +15,9 @@ export class ArticleBody {
   }
 
   private ensureLength(value: string): void {
-    if (value.length < 100) {
-      throw new InvalidArgumentError(`The Blog content has less than 100  characters`);
+    if (value.length < MIN_LENGTH && value.length > MAX_LENGTH) {
+      throw new InvalidArgumentError(`The ProductTitle <${value}> has more than ${MAX_LENGTH} or less than ${MIN_LENGTH}
+      characters`);
     }
   }
 }
