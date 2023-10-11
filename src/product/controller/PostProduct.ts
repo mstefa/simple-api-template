@@ -20,7 +20,7 @@ export class PostProduct extends Controller {
   async run(req: PostProductRequest, res: Response) {
     const { id, title, description, price, image, category } = req.body;
     try {
-      this.productCreator.run({ id, title, description, price, image, category })
+      await this.productCreator.run({ id, title, description, price, image, category })
       res.status(httpStatus.OK).send();
     } catch (error) {
       this.errorHandling(error, res);

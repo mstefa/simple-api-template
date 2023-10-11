@@ -6,6 +6,7 @@ import { ProductRepository } from '../domain/ProductRepository';
 
 interface ProductDocument {
   _id: Uuid;
+
 }
 
 export class MongoProductRepository extends MongoRepository<Product> implements ProductRepository {
@@ -13,10 +14,8 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
     return 'article';
   }
 
-  async save(object: Product): Promise<void> {
-    console.log(object)
-    throw new Error('method not implemented')
-    // return this.persist(blogPost.id, blogPost);
+  async save(product: Product): Promise<void> {
+    return this.persist(product.id, product);
   }
 
   async search(id: Uuid): Promise<Nullable<Product>> {

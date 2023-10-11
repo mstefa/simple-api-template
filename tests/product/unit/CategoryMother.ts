@@ -1,4 +1,4 @@
-import { CategoriesEnum, Category } from "../../../src/product/domain/value-objects/ProductCategory";
+import { CategoriesEnum, Category } from "../../../src/product/domain/value-objects/Category";
 
 export class CategoryMother {
   static random(): Category {

@@ -4,6 +4,7 @@ import { InvalidArgumentError } from '../../../shared/domain/errors/InvalidArgum
 export enum CategoriesEnum {
   MEN_CLOTHING = 'men_clothing',
   WOMEN_CLOTHING = 'women_clothing',
+  ELECTRONIC = 'electronic'
 }
 
 export class Category {

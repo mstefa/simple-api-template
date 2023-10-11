@@ -7,6 +7,7 @@ import { PostArticleController } from './article/controllers/PostArticleControll
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
 import { ProductCreator } from './product/application/ProductCreator';
 import { PostProduct } from './product/controller/PostProduct';
+import { MongoProductRepository } from './product/infrastructure/MongoProductRepository';
 import { config } from './shared/config/appConfig';
 import { Logger } from './shared/infrastructure/logger/Logger';
 import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
@@ -20,6 +21,7 @@ export class DependencyContainer {
 
   // public metricRepository: MongoMetricRepository;
   public articleRepository: MongoArticleRepository;
+  public productRepository: MongoProductRepository;
 
   // //Aplication
   // public metricCreator: MetricCreator;
@@ -28,15 +30,12 @@ export class DependencyContainer {
   public articleGetter: ArticleGetter;
   public productCreator: ProductCreator;
 
-
   // // Controllers
   // public postMetricController: PostMetricController;
   // public getMetricsController: GetMetricsController;
   public createArticleController: PostArticleController;
   public getBlogPostController: GetBlogPostController;
   public postProduct: PostProduct;
-
-
 
   constructor() {
 
@@ -45,11 +44,12 @@ export class DependencyContainer {
 
     // this.metricRepository = new MongoMetricRepository(this.mongoClient);
     this.articleRepository = new MongoArticleRepository(this.mongoClient);
+    this.productRepository = new MongoProductRepository(this.mongoClient)
 
     //Aplication
     this.articleCreator = new ArticleCreator(this.articleRepository);
     this.articleGetter = new ArticleGetter(this.articleRepository);
-    this.productCreator = new ProductCreator();
+    this.productCreator = new ProductCreator(this.productRepository);
 
 
     // Controllers
