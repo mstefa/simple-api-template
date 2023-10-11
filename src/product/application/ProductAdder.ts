@@ -8,7 +8,7 @@ import { ProductPrice } from "../domain/value-objects/ProductPrice";
 import { ProductTitle } from "../domain/value-objects/ProductTitle";
 import { ProductDto } from "../dtos/ProductDto";
 
-export class ProductCreator {
+export class ProductAdder {
   private repository: ProductRepository;
 
   constructor(repository: ProductRepository) {

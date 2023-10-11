@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
 import { Controller } from '../../shared/infrastructure/Controller';
-import { ProductCreator } from '../application/ProductCreator';
+import { ProductAdder } from '../application/ProductAdder';
 import { ProductDto } from '../dtos/ProductDto';
 
 type PostProductRequest = Request & {
@@ -10,17 +10,17 @@ type PostProductRequest = Request & {
 };
 
 export class PostProduct extends Controller {
-  private productCreator: ProductCreator;
+  private productAdder: ProductAdder;
 
-  constructor(productCreator: ProductCreator) {
+  constructor(productAdder: ProductAdder) {
     super();
-    this.productCreator = productCreator;
+    this.productAdder = productAdder;
   }
 
   async run(req: PostProductRequest, res: Response) {
     const { id, title, description, price, image, category } = req.body;
     try {
-      await this.productCreator.run({ id, title, description, price, image, category })
+      await this.productAdder.run({ id, title, description, price, image, category })
       res.status(httpStatus.OK).send();
     } catch (error) {
       this.errorHandling(error, res);

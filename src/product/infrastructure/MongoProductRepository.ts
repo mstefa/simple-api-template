@@ -6,6 +6,11 @@ import { ProductRepository } from '../domain/ProductRepository';
 
 interface ProductDocument {
   _id: Uuid;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
 
 }
 
@@ -21,12 +26,16 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
   async search(id: Uuid): Promise<Nullable<Product>> {
     const collection = await this.collection();
     const document = await collection.findOne<ProductDocument>({ _id: id });
-    console.log(document)
-    throw new Error('method not implemented')
 
-    //	return document
-    //		? Product.fromPrimitives(
-    //		)
-    //		: null;
+    return document
+      ? Product.fromPrimitives(
+        document._id.value,
+        document.title,
+        document.description,
+        document.price,
+        document.image,
+        document.category
+      )
+      : null;
   }
 }

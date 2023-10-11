@@ -1,0 +1,15 @@
+### Add a new product
+POST http://localhost:3000/product HTTP/1.1
+content-type: application/json
+
+      {
+        "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
+        "title": "test product",
+        "price": 13.5,
+        "description": "lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante bibendum ullamcorper. Duis cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue",
+        "image": "https://i.pravatar.cc",
+        "category": "electronic"
+      }
+
+### Create an article
+GET http://localhost:3000/metrics/?name=cpu_usage&from=2023-09-09T02:27:32.231Z&to=2023-09-12T07:50:51.003Z&intervalUnit=hour HTTP/1.1

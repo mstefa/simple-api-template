@@ -5,7 +5,7 @@ import { ArticleGetter } from './article/application/ArticleGetter';
 import { GetBlogPostController } from './article/controllers/GetArticleController';
 import { PostArticleController } from './article/controllers/PostArticleController';
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
-import { ProductCreator } from './product/application/ProductCreator';
+import { ProductAdder } from './product/application/ProductAdder';
 import { PostProduct } from './product/controller/PostProduct';
 import { MongoProductRepository } from './product/infrastructure/MongoProductRepository';
 import { config } from './shared/config/appConfig';
@@ -29,7 +29,7 @@ export class DependencyContainer {
   // public metricGetter: MetricsAverageGenerator;
   public articleCreator: ArticleCreator;
   public articleGetter: ArticleGetter;
-  public productCreator: ProductCreator;
+  public productAdder: ProductAdder;
 
   // // Controllers
   // public postMetricController: PostMetricController;
@@ -50,13 +50,13 @@ export class DependencyContainer {
     //Aplication
     this.articleCreator = new ArticleCreator(this.articleRepository);
     this.articleGetter = new ArticleGetter(this.articleRepository);
-    this.productCreator = new ProductCreator(this.productRepository);
+    this.productAdder = new ProductAdder(this.productRepository);
 
 
     // Controllers
     this.createArticleController = new PostArticleController(this.articleCreator);
     this.getBlogPostController = new GetBlogPostController(this.articleGetter)
-    this.postProduct = new PostProduct(this.productCreator);
+    this.postProduct = new PostProduct(this.productAdder);
 
     Logger.info(`  Environment stetted as: ${config.app.env}`)
     Logger.info('  Dependency loaded! \n');
