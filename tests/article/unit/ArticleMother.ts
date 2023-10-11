@@ -4,12 +4,12 @@ import { ArticleBody } from '../../../src/article/domain/value-objects/ArticleBo
 import { ArticleDate } from '../../../src/article/domain/value-objects/ArticleDate';
 import { ArticleDescription } from '../../../src/article/domain/value-objects/ArticleDescription';
 import { ArticleTitle } from '../../../src/article/domain/value-objects/ArticleTitle';
-import { Email } from '../../../src/shared-d/domain-d/value-objects/Email';
+import { Email } from '../../../src/shared/domain/value-objects/Email';
 import { DateMother } from '../../shared/data-generator/DateMother';
 import { EmailMother } from '../../shared/data-generator/EmailMother';
-import { LongTextMother } from '../../shared/data-generator/LongTextMother';
+import { ParagraphMother } from '../../shared/data-generator/ParagraphMother';
 import { UuidMother } from '../../shared/data-generator/UuidMother';
-import { WordMother } from '../../shared/data-generator/WordMother';
+import { WordsMother } from '../../shared/data-generator/WordsMother';
 
 export class ArticleMother {
 
@@ -17,9 +17,9 @@ export class ArticleMother {
 
     const article = new Article(
       UuidMother.random(),
-      new ArticleTitle(WordMother.random()),
-      new ArticleDescription(LongTextMother.byNumberOfParagraphs(1)),
-      new ArticleBody(LongTextMother.byNumberOfParagraphs(10)),
+      new ArticleTitle(WordsMother.wordRandom()),
+      new ArticleDescription(ParagraphMother.byNumberOfParagraphs(1)),
+      new ArticleBody(ParagraphMother.byNumberOfParagraphs(10)),
       new ArticleDate(DateMother.past().toISOString()),
       new Email(EmailMother.random())
     )
@@ -30,9 +30,9 @@ export class ArticleMother {
   static givenEmail = (email: Email): Article => {
     const article = new Article(
       UuidMother.random(),
-      new ArticleTitle(WordMother.random()),
-      new ArticleDescription(LongTextMother.byNumberOfParagraphs(1)),
-      new ArticleBody(LongTextMother.byNumberOfParagraphs(10)),
+      new ArticleTitle(WordsMother.wordRandom()),
+      new ArticleDescription(ParagraphMother.byNumberOfParagraphs(1)),
+      new ArticleBody(ParagraphMother.byNumberOfParagraphs(10)),
       new ArticleDate(DateMother.past().toISOString()),
       email
     )

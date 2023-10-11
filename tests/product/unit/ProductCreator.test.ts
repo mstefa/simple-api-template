@@ -1,15 +1,38 @@
-import { ProductCreator } from '../../../src/product/application/ProductCreator'
+import { ProductAdder } from '../../../src/product/application/ProductAdder'
+import { ProductRepositoryMock } from '../mocks/ProductRepositoryMock';
+import { ProductMother } from './ProductMother';
 
-let productCreator: ProductCreator;
+let productRepository: ProductRepositoryMock;
+let productAdder: ProductAdder;
 
 beforeEach(() => {
-  productCreator = new ProductCreator()
+  productRepository = new ProductRepositoryMock()
+  productAdder = new ProductAdder(productRepository)
 });
 
-describe('Product Creator', () => {
-  it('Create a new product successfully', async () => {
+describe('ProductAdder', () => {
+  it('Add a new product successfully', async () => {
 
-    productCreator.run()
+    const product = ProductMother.random()
+
+    productAdder.run(product.toPrimitives())
+
+    productRepository.assertLastSavedProductIs(product)
+
+  })
+
+  it('Throw an exception when the title is too short', async () => {
+
+    const product = ProductMother.random()
+    const productDto = product.toPrimitives();
+    productDto.title = '';
+
+    try {
+      await productAdder.run(productDto)
+    } catch (e) {
+      const error = e as Error
+      expect(error.message as string).toMatch("The ProductTitle <> has more than 50 or less than 1");
+    }
 
   })
 

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-export class LongTextMother {
+export class ParagraphMother {
   static random(): string {
     return faker.lorem.paragraphs()
   }

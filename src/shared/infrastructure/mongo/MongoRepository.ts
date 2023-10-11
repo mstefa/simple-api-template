@@ -1,7 +1,7 @@
 import { Collection, MongoClient } from 'mongodb';
 
-import { AggregateRoot } from '../../domain-d/AggregateRoot';
-import { Uuid } from '../../domain-d/value-objects/Uuid';
+import { AggregateRoot } from '../../domain/AggregateRoot';
+import { Uuid } from '../../domain/value-objects/Uuid';
 
 export abstract class MongoRepository<T extends AggregateRoot> {
   constructor(private _client: Promise<MongoClient>) { }

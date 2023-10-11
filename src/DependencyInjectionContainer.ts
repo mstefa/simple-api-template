@@ -5,10 +5,13 @@ import { ArticleGetter } from './article/application/ArticleGetter';
 import { GetBlogPostController } from './article/controllers/GetArticleController';
 import { PostArticleController } from './article/controllers/PostArticleController';
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
+import { ProductAdder } from './product/application/ProductAdder';
 import { PostProduct } from './product/controller/PostProduct';
-import { config } from './shared-d/config/appConfig';
-import { Logger } from './shared-d/infrastructure/logger/Logger';
-import { MongoClientFactory } from './shared-d/infrastructure/mongo/MongoClientFactory';
+import { MongoProductRepository } from './product/infrastructure/MongoProductRepository';
+import { config } from './shared/config/appConfig';
+import { Logger } from './shared/infrastructure/logger/Logger';
+import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
+
 
 export class DependencyContainer {
 
@@ -19,13 +22,14 @@ export class DependencyContainer {
 
   // public metricRepository: MongoMetricRepository;
   public articleRepository: MongoArticleRepository;
+  public productRepository: MongoProductRepository;
 
   // //Aplication
   // public metricCreator: MetricCreator;
   // public metricGetter: MetricsAverageGenerator;
   public articleCreator: ArticleCreator;
   public articleGetter: ArticleGetter;
-
+  public productAdder: ProductAdder;
 
   // // Controllers
   // public postMetricController: PostMetricController;
@@ -34,8 +38,6 @@ export class DependencyContainer {
   public getBlogPostController: GetBlogPostController;
   public postProduct: PostProduct;
 
-
-
   constructor() {
 
     const url = `${config.db.host}/${config.app.env}`;
@@ -43,16 +45,18 @@ export class DependencyContainer {
 
     // this.metricRepository = new MongoMetricRepository(this.mongoClient);
     this.articleRepository = new MongoArticleRepository(this.mongoClient);
+    this.productRepository = new MongoProductRepository(this.mongoClient)
 
     //Aplication
     this.articleCreator = new ArticleCreator(this.articleRepository);
-    this.articleGetter = new ArticleGetter(this.articleRepository)
+    this.articleGetter = new ArticleGetter(this.articleRepository);
+    this.productAdder = new ProductAdder(this.productRepository);
 
 
     // Controllers
     this.createArticleController = new PostArticleController(this.articleCreator);
     this.getBlogPostController = new GetBlogPostController(this.articleGetter)
-    this.postProduct = new PostProduct();
+    this.postProduct = new PostProduct(this.productAdder);
 
     Logger.info(`  Environment stetted as: ${config.app.env}`)
     Logger.info('  Dependency loaded! \n');

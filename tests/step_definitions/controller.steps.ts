@@ -1,23 +1,19 @@
-import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
+import { Given, Then } from '@cucumber/cucumber';
 import * as assert from 'assert'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import supertest from 'supertest';
 
-import Server from '../../../../src/server';
+import { server } from './preparation.steps';
 
-let application: Server;
 let _request: supertest.Test;
 let _response: supertest.Response;
 
-// const mongoClient = MongoClientFactory.createClient({ url: 'mongodb://localhost:27017/mcc' });
-
 Given('I send a GET request to {string}', (route: string) => {
-  _request = supertest(application.getHTTPServer()).get(route)
+  _request = supertest(server.getHTTPServer()).get(route)
 });
 
 Given('I send a POST request to {string} with body:', (route: string, bodyData: string) => {
   const body = JSON.parse(bodyData)
-  _request = supertest(application.getHTTPServer()).post(route).send(body);
+  _request = supertest(server.getHTTPServer()).post(route).send(body);
 });
 
 Then('the response status code should be {int}', async (status: number) => {
@@ -37,11 +33,13 @@ Then('the response should have a payload:', (payload: string) => {
   assert.deepStrictEqual(_response.body, expected);
 });
 
-BeforeAll(async () => {
-  application = new Server('4000');
-  await application.start();
+
+
+Then('the response has as unit {string}, with {int} values starting from {string} and {int} sets of values', (unit: string, numberOfValues: number, fromDate: string, numberOfSet: number) => {
+  assert.deepStrictEqual(_response.body.intervalUnit, unit)
+  assert.deepStrictEqual(_response.body.timeValues.length, numberOfValues)
+  assert.deepStrictEqual(_response.body.metricValues.length, numberOfSet)
+  assert.deepStrictEqual(_response.body.timeValues[0], fromDate)
 });
 
-AfterAll(async () => {
-  await application.stop();
-});
+

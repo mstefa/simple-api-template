@@ -1,6 +1,6 @@
 import { ArticleCreator } from '../../../src/article/application/ArticleCreator'
 import { DateMother } from '../../shared/data-generator/DateMother';
-import { WordMother } from '../../shared/data-generator/WordMother';
+import { WordsMother } from '../../shared/data-generator/WordsMother';
 import { ArticleRepositoryMock } from '../mocks/ArticleRepositoryMock';
 import { ArticleMother } from './ArticleMother';
 
@@ -41,7 +41,7 @@ describe('Create a Blog Post', () => {
     const article = ArticleMother.random();
     const articleRequest = article.toPrimitives();
     // force invalid email
-    articleRequest.authorEmail = WordMother.random();
+    articleRequest.authorEmail = WordsMother.wordRandom();
 
     try {
       expect(await articleCreator.run(articleRequest)).toThrow()

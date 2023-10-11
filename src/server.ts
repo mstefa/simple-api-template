@@ -11,7 +11,7 @@ import morgan from 'morgan';
 
 import { DependencyContainer } from './DependencyInjectionContainer';
 import { registerRoutes as registerArticleRoutes } from './routes';
-import { Logger } from './shared-d/infrastructure/logger/Logger';
+import { Logger } from './shared/infrastructure/logger/Logger';
 
 const router = Router();
 

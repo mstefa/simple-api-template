@@ -1,4 +1,5 @@
-import { InvalidArgumentError } from '../../../shared-d/domain-d/Errors/InvalidArgumentError';
+import { InvalidArgumentError } from '../../../shared/domain/errors/InvalidArgumentError';
+
 
 export class ArticleTitle {
   readonly value: string;
