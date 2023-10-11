@@ -15,6 +15,7 @@ export class ProductDescription {
   }
 
   private ensureLength(value: string): void {
+
     if (value.length < MIN_LENGTH || value.length > MAX_LENGTH) {
       throw new InvalidArgumentError(`The ProductDescription <${value}> has more than ${MAX_LENGTH} or less than ${MIN_LENGTH} characters`);
     }

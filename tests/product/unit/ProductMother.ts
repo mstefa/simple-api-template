@@ -17,7 +17,7 @@ export class ProductMother {
     const product = new Product(
       UuidMother.random(),
       new ProductTitle(WordsMother.wordRandom()),
-      new ProductDescription(WordsMother.alphanumericRandom(100, 500)),
+      new ProductDescription(WordsMother.alphanumericRandom(50, 300)),
       new ProductPrice(NumberMother.between(0, 1000)),
       new ProductImage(UrlMother.random()),
       CategoryMother.random()
