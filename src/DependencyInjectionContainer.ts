@@ -12,6 +12,7 @@ import { config } from './shared/config/appConfig';
 import { Logger } from './shared/infrastructure/logger/Logger';
 import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
 
+
 export class DependencyContainer {
 
   // eslint-disable-next-line no-use-before-define

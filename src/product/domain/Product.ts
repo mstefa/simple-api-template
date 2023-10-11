@@ -1,5 +1,5 @@
-import { AggregateRoot } from '../../shared/domain/AggregateRoot';
-import { Uuid } from '../../shared/domain/value-objects/Uuid';
+import { AggregateRoot } from '../../shared-d/domain-d/AggregateRoot';
+import { Uuid } from '../../shared-d/domain-d/value-objects/Uuid';
 import { ProductDto } from '../dtos/ProductDto';
 import { Category } from './value-objects/Category';
 import { ProductDescription } from './value-objects/ProductDescription';

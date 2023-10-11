@@ -1,8 +1,8 @@
 
 
-import { Nullable } from '../../shared/domain/Nullable';
-import { Uuid } from '../../shared/domain/value-objects/Uuid';
-import { MongoRepository } from '../../shared/infrastructure/mongo/MongoRepository';
+import { Nullable } from '../../shared-d/domain-d/Nullable';
+import { Uuid } from '../../shared-d/domain-d/value-objects/Uuid';
+import { MongoRepository } from '../../shared-d/infrastructure/mongo/MongoRepository';
 import { Article } from '../domain/Article';
 import { ArticleRepository } from '../domain/ArticleRepository';
 

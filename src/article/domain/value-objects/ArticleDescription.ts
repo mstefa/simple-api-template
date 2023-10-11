@@ -1,5 +1,6 @@
 import { InvalidArgumentError } from '../../../shared/domain/errors/InvalidArgumentError';
 
+
 export class ArticleDescription {
   readonly value: string;
 

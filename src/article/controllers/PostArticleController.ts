@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
-import { Controller } from '../../shared/infrastructure/Controller';
+import { Controller } from '../../shared-d/infrastructure/Controller';
 import { ArticleCreator } from '../application/ArticleCreator';
 import { Article } from '../domain/Article';
 
