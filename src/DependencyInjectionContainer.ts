@@ -6,9 +6,9 @@ import { GetBlogPostController } from './article/controllers/GetArticleControlle
 import { PostArticleController } from './article/controllers/PostArticleController';
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
 import { PostProduct } from './product/controller/PostProduct';
-import { config } from './shared/config/appConfig';
-import { Logger } from './shared/infrastructure/logger/Logger';
-import { MongoClientFactory } from './shared/infrastructure/mongo/MongoClientFactory';
+import { config } from './shared-d/config/appConfig';
+import { Logger } from './shared-d/infrastructure/logger/Logger';
+import { MongoClientFactory } from './shared-d/infrastructure/mongo/MongoClientFactory';
 
 export class DependencyContainer {
 

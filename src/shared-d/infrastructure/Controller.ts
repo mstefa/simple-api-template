@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
-import DomainError from '../domain/Errors/DomainError';
+import DomainError from '../domain-d/Errors/DomainError';
 import { Logger } from './logger/Logger';
 
 export abstract class Controller {

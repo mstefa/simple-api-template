@@ -1,8 +1,8 @@
 import { Article } from '../../../src/article/domain/Article';
 import { ArticleRepository } from '../../../src/article/domain/ArticleRepository';
-import { Nullable } from '../../../src/shared/domain/Nullable';
-import { Email } from '../../../src/shared/domain/value-objects/Email';
-import { Uuid } from '../../../src/shared/domain/value-objects/Uuid';
+import { Nullable } from '../../../src/shared-d/domain-d/Nullable';
+import { Email } from '../../../src/shared-d/domain-d/value-objects/Email';
+import { Uuid } from '../../../src/shared-d/domain-d/value-objects/Uuid';
 
 export class ArticleRepositoryMock implements ArticleRepository {
 

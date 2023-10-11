@@ -1,6 +1,6 @@
 import Server from './src/server';
-import { config } from './src/shared/config/appConfig';
-import { Logger } from './src/shared/infrastructure/logger/Logger';
+import { config } from './src/shared-d/config/appConfig';
+import { Logger } from './src/shared-d/infrastructure/logger/Logger';
 
 const port = config.server.port;
 
