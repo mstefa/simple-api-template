@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+
 import { Controller } from '../../shared/infrastructure/Controller';
 import { ProductCreator } from '../application/ProductCreator';
 import { ProductDto } from '../dtos/ProductDto';
