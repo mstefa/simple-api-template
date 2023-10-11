@@ -27,7 +27,7 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: npm linter
+      - name: npm run linter
         run: |
           npm run lint --if-present
       - name: npm run build
@@ -39,4 +39,3 @@ jobs:
       - name: npm test
         run: |
           npm test --if-present
-      - run: npm test
