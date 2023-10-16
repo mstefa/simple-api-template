@@ -1,7 +1,6 @@
 import { Product } from '../../../src/product/domain/Product';
 import { ProductRepository } from '../../../src/product/domain/ProductRepository';
 import { Nullable } from '../../../src/shared/domain/Nullable';
-import { Email } from '../../../src/shared/domain/value-objects/Email';
 import { Uuid } from '../../../src/shared/domain/value-objects/Uuid';
 
 export class ProductRepositoryMock implements ProductRepository {
@@ -16,12 +15,6 @@ export class ProductRepositoryMock implements ProductRepository {
 
   search(id: Uuid): Promise<Nullable<Product>> {
     this.mockSearch(id);
-
-    return Promise.resolve(this.mockProduct);
-  }
-
-  searchByEmail(email: Email): Promise<Nullable<Product>> {
-    this.mockSearch(email);
 
     return Promise.resolve(this.mockProduct);
   }
