@@ -6,6 +6,8 @@ import { GetBlogPostController } from './article/controllers/GetArticleControlle
 import { PostArticleController } from './article/controllers/PostArticleController';
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
 import { ProductAdder } from './product/application/ProductAdder';
+import { ProductFinder } from './product/application/ProductFinder';
+import { GetProduct } from './product/controller/GetProduct';
 import { PostProduct } from './product/controller/PostProduct';
 import { MongoProductRepository } from './product/infrastructure/MongoProductRepository';
 import { config } from './shared/config/appConfig';
@@ -30,6 +32,7 @@ export class DependencyContainer {
   public articleCreator: ArticleCreator;
   public articleGetter: ArticleGetter;
   public productAdder: ProductAdder;
+  public productFinder: ProductFinder;
 
   // // Controllers
   // public postMetricController: PostMetricController;
@@ -37,6 +40,7 @@ export class DependencyContainer {
   public createArticleController: PostArticleController;
   public getBlogPostController: GetBlogPostController;
   public postProduct: PostProduct;
+  public getProduct: GetProduct;
 
   constructor() {
 
@@ -51,12 +55,14 @@ export class DependencyContainer {
     this.articleCreator = new ArticleCreator(this.articleRepository);
     this.articleGetter = new ArticleGetter(this.articleRepository);
     this.productAdder = new ProductAdder(this.productRepository);
+    this.productFinder = new ProductFinder(this.productRepository);
 
 
     // Controllers
     this.createArticleController = new PostArticleController(this.articleCreator);
     this.getBlogPostController = new GetBlogPostController(this.articleGetter)
     this.postProduct = new PostProduct(this.productAdder);
+    this.getProduct = new GetProduct(this.productFinder);
 
     Logger.info(`  Environment stetted as: ${config.app.env}`)
     Logger.info('  Dependency loaded! \n');

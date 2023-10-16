@@ -4,7 +4,7 @@ Feature: Create a new article an save it in the
   I want to save the article's data on the DB
 
   Scenario: Create a new Article Succesfully
-    Given I send a POST request to "/blog/article" with body:
+    When I send a POST request to "/blog/article" with body:
       """
       {
         "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
@@ -19,7 +19,7 @@ Feature: Create a new article an save it in the
     And the response should be empty
 
   Scenario: Failed to create a Article when the body is to short.
-    Given I send a POST request to "/blog/article" with body:
+    When I send a POST request to "/blog/article" with body:
       """
       {
         "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",

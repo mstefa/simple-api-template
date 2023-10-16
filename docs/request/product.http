@@ -12,4 +12,4 @@ content-type: application/json
       }
 
 ### Create an article
-GET http://localhost:3000/metrics/?name=cpu_usage&from=2023-09-09T02:27:32.231Z&to=2023-09-12T07:50:51.003Z&intervalUnit=hour HTTP/1.1
+GET http://localhost:3000/product/ef8ac118-8d7f-49cc-abec-78e0d05af80a HTTP/1.1

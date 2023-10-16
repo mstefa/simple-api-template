@@ -15,7 +15,7 @@ export class Product extends AggregateRoot {
     readonly description: ProductDescription,
     readonly price: ProductPrice,
     readonly image: ProductImage,
-    readonly category: Category,
+    readonly category: Category
 
   ) {
     super();

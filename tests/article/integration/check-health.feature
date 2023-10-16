@@ -4,5 +4,5 @@ Feature: Api check-health
   I want to check the api status
 
   Scenario: Check the api check-health
-    Given I send a GET request to "/check-health"
+    When I send a GET request to "/check-health"
     Then the response status code should be 200

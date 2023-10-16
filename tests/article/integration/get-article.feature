@@ -4,7 +4,7 @@ As a reader
 I want to obtain an existing article from the DB
 
 # Scenario: Obatin an existeing article succesfully
-#   Given I send a GET request to "/blog/article/ef8ac118-8d7f-49cc-abec-78e0d05af80a"
+#   When I send a GET request to "/blog/article/ef8ac118-8d7f-49cc-abec-78e0d05af80a"
 #   Then the response status code should be 200
 #   And the response should have a payload:
 #     """
