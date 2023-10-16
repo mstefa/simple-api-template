@@ -1,19 +1,31 @@
-import { Then } from '@cucumber/cucumber';
+import { Given, Then } from '@cucumber/cucumber';
 import * as assert from 'assert'
 
+import { Product } from '../../src/product/domain/Product';
+import { Category } from '../../src/product/domain/value-objects/Category';
+import { ProductDescription } from '../../src/product/domain/value-objects/ProductDescription';
+import { ProductImage } from '../../src/product/domain/value-objects/ProductImage';
+import { ProductPrice } from '../../src/product/domain/value-objects/ProductPrice';
+import { ProductTitle } from '../../src/product/domain/value-objects/ProductTitle';
 import { ProductDto } from '../../src/product/dtos/ProductDto';
 import { Uuid } from '../../src/shared/domain/value-objects/Uuid';
 import { _productRepository } from './preparation.steps';
 
 
-// Given('the Product is saved in the db:', async (payload: string) => {
-//   const expectedProduct = JSON.parse(payload) as ProductDto;
+Given('in the db a Product is save with the following properties:', async (payload: string) => {
+  const expectedProductDto = JSON.parse(payload) as ProductDto;
+  const expectedProduct = new Product(
+    new Uuid(expectedProductDto.id),
+    new ProductTitle(expectedProductDto.title),
+    new ProductDescription(expectedProductDto.description),
+    new ProductPrice(expectedProductDto.price),
+    new ProductImage(expectedProductDto.image),
+    new Category(expectedProductDto.category)
+  )
 
-//   const metricOnDb = await _productRepository.search(new Uuid(expectedProduct.id))
-//   console.log(metricOnDb)
+  await _productRepository.save(expectedProduct)
 
-//   assert.deepStrictEqual(1, 1)
-// });
+});
 
 Then('the Product should be save in the db:', async (payload: string) => {
   const expectedProduct = JSON.parse(payload) as ProductDto;

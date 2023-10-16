@@ -1,4 +1,4 @@
-import { Given, Then } from '@cucumber/cucumber';
+import { Then, When } from '@cucumber/cucumber';
 import * as assert from 'assert'
 import supertest from 'supertest';
 
@@ -7,11 +7,11 @@ import { server } from './preparation.steps';
 let _request: supertest.Test;
 let _response: supertest.Response;
 
-Given('I send a GET request to {string}', (route: string) => {
+When('I send a GET request to {string}', (route: string) => {
   _request = supertest(server.getHTTPServer()).get(route)
 });
 
-Given('I send a POST request to {string} with body:', (route: string, bodyData: string) => {
+When('I send a POST request to {string} with body:', (route: string, bodyData: string) => {
   const body = JSON.parse(bodyData)
   _request = supertest(server.getHTTPServer()).post(route).send(body);
 });
