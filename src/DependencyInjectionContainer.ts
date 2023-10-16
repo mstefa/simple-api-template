@@ -8,6 +8,7 @@ import { MongoArticleRepository } from './article/infrastructure/MongoArticleRep
 import { ProductAdder } from './product/application/ProductAdder';
 import { ProductFinder } from './product/application/ProductFinder';
 import { GetProduct } from './product/controller/GetProduct';
+import { GetProducts } from './product/controller/GetProducts';
 import { PostProduct } from './product/controller/PostProduct';
 import { MongoProductRepository } from './product/infrastructure/MongoProductRepository';
 import { config } from './shared/config/appConfig';
@@ -41,6 +42,7 @@ export class DependencyContainer {
   public getBlogPostController: GetBlogPostController;
   public postProduct: PostProduct;
   public getProduct: GetProduct;
+  public getProducts: GetProducts
 
   constructor() {
 
@@ -63,6 +65,7 @@ export class DependencyContainer {
     this.getBlogPostController = new GetBlogPostController(this.articleGetter)
     this.postProduct = new PostProduct(this.productAdder);
     this.getProduct = new GetProduct(this.productFinder);
+    this.getProducts = new GetProducts();
 
     Logger.info(`  Environment stetted as: ${config.app.env}`)
     Logger.info('  Dependency loaded! \n');

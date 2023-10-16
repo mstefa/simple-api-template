@@ -29,4 +29,8 @@ export const register = (router: Router) => {
     DIContainer.getProduct.run(req, res)
   );
 
+  router.get('/products', (req: Request, res: Response) =>
+    DIContainer.getProducts.run(req, res)
+  );
+
 };
