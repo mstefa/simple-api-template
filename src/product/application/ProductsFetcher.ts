@@ -1,3 +1,6 @@
+import { Criteria } from "../../shared/domain/criteria/Criteria";
+import { Filters } from "../../shared/domain/criteria/Filters";
+import { Order } from "../../shared/domain/criteria/Order";
 import { ProductRepository } from "../domain/ProductRepository";
 import { ProductDto } from "../dtos/ProductDto";
 
@@ -9,7 +12,8 @@ export class ProductsFetcher {
   }
 
   async run(): Promise<ProductDto[]> {
-    const products = await this.repository.searchByCriteria();
+    const criteria = new Criteria(Filters.none(), Order.none(), 10, 0)
+    const products = await this.repository.searchByCriteria(criteria);
 
     return products.map(product => product.toPrimitives());
   }

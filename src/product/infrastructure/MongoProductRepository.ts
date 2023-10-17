@@ -1,3 +1,4 @@
+import { Criteria } from '../../shared/domain/criteria/Criteria';
 import { Nullable } from '../../shared/domain/Nullable';
 import { Uuid } from '../../shared/domain/value-objects/Uuid';
 import { MongoRepository } from '../../shared/infrastructure/mongo/MongoRepository';
@@ -17,7 +18,7 @@ interface ProductDocument {
 export class MongoProductRepository extends MongoRepository<Product> implements ProductRepository {
 
   protected collectionName(): string {
-    return 'article';
+    return 'product';
   }
 
   async save(product: Product): Promise<void> {
@@ -40,14 +41,20 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
       : null;
   }
 
-  async searchByCriteria(): Promise<Product[]> {
+  async searchByCriteria(criteria: Criteria): Promise<Product[]> {
 
+    // eslint-disable-next-line no-console
+    console.log('criteria')
+
+    console.log(criteria)
     const collection = await this.collection();
-    const documents = await collection.find<ProductDocument>({});
+    const documents = await collection.find<ProductDocument>({})
+      .skip(criteria.offset ? criteria.offset : 0)
+      .limit(criteria.limit ? criteria.limit : 100);
 
     return documents.map(document => {
       return Product.fromPrimitives(
-        document._id.toString(),
+        document._id.value,
         document.title,
         document.description,
         document.price,

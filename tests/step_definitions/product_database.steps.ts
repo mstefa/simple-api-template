@@ -12,7 +12,12 @@ import { Uuid } from '../../src/shared/domain/value-objects/Uuid';
 import { _productRepository } from './preparation.steps';
 
 
+Given('An empty database', async () => {
+  await _productRepository._drop()
+})
+
 Given('in the db a Product is save with the following properties:', async (payload: string) => {
+
   const expectedProductDto = JSON.parse(payload) as ProductDto;
   const expectedProduct = new Product(
     new Uuid(expectedProductDto.id),

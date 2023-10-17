@@ -1,7 +1,8 @@
 Feature: Get a product that already exists in the database.
 
   Scenario: Get a product Succesfully
-    Given in the db a Product is save with the following properties:
+    Given An empty database
+    And in the db a Product is save with the following properties:
       """
       {
         "id": "64326ad7-4615-415e-8e1a-4e42ee82680e",
