@@ -15,6 +15,7 @@ interface ProductDocument {
 }
 
 export class MongoProductRepository extends MongoRepository<Product> implements ProductRepository {
+
   protected collectionName(): string {
     return 'article';
   }
@@ -38,4 +39,22 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
       )
       : null;
   }
+
+  async searchByCriteria(): Promise<Product[]> {
+
+    const collection = await this.collection();
+    const documents = await collection.find<ProductDocument>({});
+
+    return documents.map(document => {
+      return Product.fromPrimitives(
+        document._id.toString(),
+        document.title,
+        document.description,
+        document.price,
+        document.image,
+        document.category
+      )
+    }).toArray()
+  }
+
 }

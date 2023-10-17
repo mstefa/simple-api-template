@@ -13,8 +13,7 @@ export class GetProducts extends Controller {
   }
 
   async run(req: Request, res: Response) {
-    //const { id } = req.body;
-    //const id = req.params.id;
+
     try {
       const products = [
         {

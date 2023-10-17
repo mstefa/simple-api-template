@@ -8,6 +8,8 @@ export class ProductRepositoryMock implements ProductRepository {
   private mockSave = jest.fn();
   private mockSearch = jest.fn();
   private mockProduct: Nullable<Product> = null;
+  private mockProducts: Product[] = [];
+
 
   async save(user: Product): Promise<void> {
     this.mockSave(user);
@@ -19,6 +21,10 @@ export class ProductRepositoryMock implements ProductRepository {
     return Promise.resolve(this.mockProduct);
   }
 
+  searchByCriteria(): Promise<Product[]> {
+    return Promise.resolve(this.mockProducts);
+  }
+
   assertLastSavedProductIs(expected: Product): void {
     const mock = this.mockSave.mock;
     const lastSavedProduct = mock.calls[mock.calls.length - 1][0] as Product;
@@ -28,6 +34,10 @@ export class ProductRepositoryMock implements ProductRepository {
 
   returnOnSearch(article: Product) {
     this.mockProduct = article;
+  }
+
+  returnOnSearchByCriteria(articles: Product[]) {
+    this.mockProducts = articles;
   }
 
   assertSearch(id: Uuid) {

@@ -6,5 +6,6 @@ export interface ProductRepository {
 
   save(product: Product): Promise<void>;
   search(id: Uuid): Promise<Nullable<Product>>;
+  searchByCriteria(): Promise<Product[]>;
 
 }
