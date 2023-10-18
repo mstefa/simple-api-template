@@ -43,10 +43,6 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
 
   async searchByCriteria(criteria: Criteria): Promise<Product[]> {
 
-    // eslint-disable-next-line no-console
-    console.log('criteria')
-
-    console.log(criteria)
     const collection = await this.collection();
     const documents = await collection.find<ProductDocument>({})
       .skip(criteria.offset ? criteria.offset : 0)

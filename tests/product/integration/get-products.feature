@@ -1,6 +1,6 @@
 Feature: Get a product that already exists in the database.
 
-  Scenario: Get a product Succesfully
+  Scenario: Get two exiting products Succesfully
     Given An empty database
     And in the db a Product is save with the following properties:
       """

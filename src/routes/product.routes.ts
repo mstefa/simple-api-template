@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { body, param } from 'express-validator';
+import { body, param, query } from 'express-validator';
 
 import { DependencyContainer } from '../DependencyInjectionContainer';
 import { validateReqSchema } from '.';
@@ -21,6 +21,11 @@ export const register = (router: Router) => {
 
   const reqGetProductSchema = [param('id').exists().isUUID()];
 
+  const reqGetProductsSchema = [
+    query('limit').optional().isNumeric(),
+    query('offset').optional().isNumeric()
+  ];
+
   router.post('/product', reqPostProductSchema, validateReqSchema, (req: Request, res: Response) =>
     DIContainer.postProduct.run(req, res)
   );
@@ -29,7 +34,7 @@ export const register = (router: Router) => {
     DIContainer.getProduct.run(req, res)
   );
 
-  router.get('/products', (req: Request, res: Response) =>
+  router.get('/products', reqGetProductsSchema, validateReqSchema, (req: Request, res: Response) =>
     DIContainer.getProducts.run(req, res)
   );
 
