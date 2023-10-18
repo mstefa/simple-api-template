@@ -1,7 +1,7 @@
 Feature: Get a product that already exists in the database.
 
   Scenario: Get two exiting products Succesfully
-    Given An empty database
+    Given An empty product database
     And in the db a Product is save with the following properties:
       """
       {
@@ -47,3 +47,16 @@ Feature: Get a product that already exists in the database.
         }
       ]
       """
+  Scenario: Get the number of products asked on the request Succesfully
+    Given An empty product database
+    And in the db there are 10 random products
+    When I send a GET request to "/products?limit=5"
+    Then the response status code should be 200
+    Then the response should have a payload with 5 elements
+
+  Scenario: Get the number the rest of products asked on the request Succesfully
+    Given An empty product database
+    And in the db there are 10 random products
+    When I send a GET request to "/products?limit=5&offset=9"
+    Then the response status code should be 200
+    Then the response should have a payload with 1 elements

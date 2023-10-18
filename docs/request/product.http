@@ -16,4 +16,4 @@ GET http://localhost:3000/product/ef8ac118-8d7f-49cc-abec-78e0d05af80a HTTP/1.1
 
 
 ### Get all products
-GET http://localhost:3000/products HTTP/1.1
+GET http://localhost:3000/products?limit=5 HTTP/1.1

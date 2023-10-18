@@ -6,8 +6,8 @@ import { ProductsFetcher } from '../application/ProductsFetcher';
 
 type GetProductsRequest = Request & {
   query: {
-    limit?: number;
-    offset?: number;
+    limit?: string;
+    offset?: string;
   };
 };
 export class GetProducts extends Controller {
@@ -19,8 +19,8 @@ export class GetProducts extends Controller {
   }
 
   async run(req: GetProductsRequest, res: Response) {
-    const limit = req.query.limit ? req.query.limit : 10;
-    const offset = req.query.offset ? req.query.offset : 0;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    const offset = req.query.offset ? parseInt(req.query.offset) : 0;
 
     try {
       const products = await this.productsFetcher.run(limit, offset);

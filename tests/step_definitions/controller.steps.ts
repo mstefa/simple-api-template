@@ -33,13 +33,11 @@ Then('the response should have a payload:', (payload: string) => {
   assert.deepStrictEqual(_response.body, expected);
 });
 
-
-
-Then('the response has as unit {string}, with {int} values starting from {string} and {int} sets of values', (unit: string, numberOfValues: number, fromDate: string, numberOfSet: number) => {
-  assert.deepStrictEqual(_response.body.intervalUnit, unit)
-  assert.deepStrictEqual(_response.body.timeValues.length, numberOfValues)
-  assert.deepStrictEqual(_response.body.metricValues.length, numberOfSet)
-  assert.deepStrictEqual(_response.body.timeValues[0], fromDate)
+Then('the response should have a payload with {int} elements', (numberOfProduct: number) => {
+  const received = (_response.body as unknown as Array<unknown>).length;
+  assert.deepEqual(received, numberOfProduct);
 });
+
+
 
 

@@ -9,10 +9,11 @@ import { ProductPrice } from '../../src/product/domain/value-objects/ProductPric
 import { ProductTitle } from '../../src/product/domain/value-objects/ProductTitle';
 import { ProductDto } from '../../src/product/dtos/ProductDto';
 import { Uuid } from '../../src/shared/domain/value-objects/Uuid';
+import { ProductMother } from '../product/unit/ProductMother';
 import { _productRepository } from './preparation.steps';
 
 
-Given('An empty database', async () => {
+Given('An empty product database', async () => {
   await _productRepository._drop()
 })
 
@@ -29,6 +30,19 @@ Given('in the db a Product is save with the following properties:', async (paylo
   )
 
   await _productRepository.save(expectedProduct)
+
+});
+
+Given('in the db there are {int} random products', async (numberOfProduct: number) => {
+
+  const resolved: Promise<void>[] = [];
+
+  for (let i = 0; i < numberOfProduct; i++) {
+    const mockedProduct = ProductMother.random();
+    resolved.push(_productRepository.save(mockedProduct));
+  }
+
+  await Promise.all(resolved)
 
 });
 
