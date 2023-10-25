@@ -18,7 +18,7 @@ describe('ProductsFetcher', () => {
     const product1 = ProductMother.random();
     const product2 = ProductMother.random();
     repository.returnOnSearchByCriteria([product1, product2])
-    const data = await productsFetcher.run()
+    const data = await productsFetcher.run(2, 0)
 
     expect(data).toEqual([product1.toPrimitives(), product2.toPrimitives()])
 

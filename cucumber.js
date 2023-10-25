@@ -8,6 +8,22 @@ const backend = [
   '--require tests/step_definitions/*.steps.ts'
 ].join(' ');
 
+
+const product = [
+  ...common,
+  'tests/product/integration/*.feature',
+  '--require tests/step_definitions/*.steps.ts'
+].join(' ');
+
+const cart = [
+  ...common,
+  'tests/cart/integration/*.feature',
+  '--require tests/step_definitions/*.steps.ts'
+].join(' ');
+
+
 module.exports = {
-  backend
+  backend,
+  product,
+  cart
 };

@@ -11,11 +11,11 @@ export class Product extends AggregateRoot {
 
   constructor(
     readonly id: Uuid,
-    readonly title: ProductTitle,
-    readonly description: ProductDescription,
-    readonly price: ProductPrice,
-    readonly image: ProductImage,
-    readonly category: Category
+    private title: ProductTitle,
+    private description: ProductDescription,
+    private price: ProductPrice,
+    private image: ProductImage,
+    private category: Category
 
   ) {
     super();
@@ -34,22 +34,16 @@ export class Product extends AggregateRoot {
   }
 
   static fromPrimitives(
-    id: string,
-    title: string,
-    description: string,
-    price: number,
-    image: string,
-    category: string
-
+    data: ProductDto
   ): Product {
 
     return new Product(
-      new Uuid(id),
-      new ProductTitle(title),
-      new ProductDescription(description),
-      new ProductPrice(price),
-      new ProductImage(image),
-      new Category(category)
+      new Uuid(data.id),
+      new ProductTitle(data.title),
+      new ProductDescription(data.description),
+      new ProductPrice(data.price),
+      new ProductImage(data.image),
+      new Category(data.category)
     );
   }
 }

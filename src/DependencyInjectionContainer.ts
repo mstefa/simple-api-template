@@ -5,6 +5,9 @@ import { ArticleGetter } from './article/application/ArticleGetter';
 import { GetBlogPostController } from './article/controllers/GetArticleController';
 import { PostArticleController } from './article/controllers/PostArticleController';
 import { MongoArticleRepository } from './article/infrastructure/MongoArticleRepository';
+import { CartUpdater } from './cart/application/CartUpdater';
+import { PutCart } from './cart/controler/PutCart';
+import { MongoCartRepository } from './cart/infrastructure/MongoCartRepository';
 import { ProductAdder } from './product/application/ProductAdder';
 import { ProductFinder } from './product/application/ProductFinder';
 import { ProductsFetcher } from './product/application/ProductsFetcher';
@@ -27,6 +30,7 @@ export class DependencyContainer {
   // public metricRepository: MongoMetricRepository;
   public articleRepository: MongoArticleRepository;
   public productRepository: MongoProductRepository;
+  public cartRepository: MongoCartRepository;
 
   // //Aplication
   // public metricCreator: MetricCreator;
@@ -35,6 +39,8 @@ export class DependencyContainer {
   public articleGetter: ArticleGetter;
   public productAdder: ProductAdder;
   public productFinder: ProductFinder;
+  public productsFetcher: ProductsFetcher;
+  public cartUpdater: CartUpdater;
 
   // // Controllers
   // public postMetricController: PostMetricController;
@@ -44,7 +50,7 @@ export class DependencyContainer {
   public postProduct: PostProduct;
   public getProduct: GetProduct;
   public getProducts: GetProducts;
-  public productsFetcher: ProductsFetcher;
+  public putCart: PutCart;
 
   constructor() {
 
@@ -54,6 +60,7 @@ export class DependencyContainer {
     // this.metricRepository = new MongoMetricRepository(this.mongoClient);
     this.articleRepository = new MongoArticleRepository(this.mongoClient);
     this.productRepository = new MongoProductRepository(this.mongoClient)
+    this.cartRepository = new MongoCartRepository(this.mongoClient)
 
     //Aplication
     this.articleCreator = new ArticleCreator(this.articleRepository);
@@ -61,6 +68,7 @@ export class DependencyContainer {
     this.productAdder = new ProductAdder(this.productRepository);
     this.productFinder = new ProductFinder(this.productRepository);
     this.productsFetcher = new ProductsFetcher(this.productRepository)
+    this.cartUpdater = new CartUpdater(this.cartRepository);
 
     // Controllers
     this.createArticleController = new PostArticleController(this.articleCreator);
@@ -68,6 +76,7 @@ export class DependencyContainer {
     this.postProduct = new PostProduct(this.productAdder);
     this.getProduct = new GetProduct(this.productFinder);
     this.getProducts = new GetProducts(this.productsFetcher);
+    this.putCart = new PutCart(this.cartUpdater);
 
     Logger.info(`  Environment stetted as: ${config.app.env}`)
     Logger.info('  Dependency loaded! \n');

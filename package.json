@@ -16,6 +16,8 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "NODE_ENV=test jest",
     "test:integration": "NODE_ENV=test cucumber-js -p backend",
+    "test:product:integration": "NODE_ENV=test cucumber-js -p product",
+    "test:cart:integration": "NODE_ENV=test cucumber-js -p cart",
     "build:clean": "npm run clean && npm run build",
     "build": "tsc -p tsconfig.json ",
     "clean": "rm -r dist; exit 0",

@@ -16,6 +16,11 @@ When('I send a POST request to {string} with body:', (route: string, bodyData: s
   _request = supertest(server.getHTTPServer()).post(route).send(body);
 });
 
+When('I send a PUT request to {string} with body:', (route: string, bodyData: string) => {
+  const body = JSON.parse(bodyData)
+  _request = supertest(server.getHTTPServer()).put(route).send(body);
+});
+
 Then('the response status code should be {int}', async (status: number) => {
   _response = await _request.expect(status);
 });

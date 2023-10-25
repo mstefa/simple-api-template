@@ -30,14 +30,14 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
     const document = await collection.findOne<ProductDocument>({ _id: id });
 
     return document
-      ? Product.fromPrimitives(
-        document._id.value,
-        document.title,
-        document.description,
-        document.price,
-        document.image,
-        document.category
-      )
+      ? Product.fromPrimitives({
+        id: document._id.value,
+        title: document.title,
+        description: document.description,
+        price: document.price,
+        image: document.image,
+        category: document.category
+      })
       : null;
   }
 
@@ -49,14 +49,14 @@ export class MongoProductRepository extends MongoRepository<Product> implements 
       .limit(criteria.limit ? criteria.limit : 100);
 
     return documents.map(document => {
-      return Product.fromPrimitives(
-        document._id.value,
-        document.title,
-        document.description,
-        document.price,
-        document.image,
-        document.category
-      )
+      return Product.fromPrimitives({
+        id: document._id.value,
+        title: document.title,
+        description: document.description,
+        price: document.price,
+        image: document.image,
+        category: document.category
+      })
     }).toArray()
   }
 

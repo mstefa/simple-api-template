@@ -1,8 +1,9 @@
-import { InvalidArgumentError } from '../../../shared/domain/errors/InvalidArgumentError';
+import { InvalidArgumentError } from '../../shared/domain/errors/InvalidArgumentError';
 
 export class CartProduct {
   readonly id: string;
   readonly quantity: number;
+
   constructor(id: string, quantity: number) {
     this.ensureIsPositive(quantity);
     this.id = id;
