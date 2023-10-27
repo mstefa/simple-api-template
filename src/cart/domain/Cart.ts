@@ -7,8 +7,8 @@ export class Cart extends AggregateRoot {
 
   constructor(
     readonly id: Uuid,
-    private userId: Uuid,
-    private products: CartProduct[],
+    public userId: Uuid,
+    public products: CartProduct[],
   ) {
     super();
   }

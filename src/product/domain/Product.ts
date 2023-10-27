@@ -11,11 +11,11 @@ export class Product extends AggregateRoot {
 
   constructor(
     readonly id: Uuid,
-    private title: ProductTitle,
-    private description: ProductDescription,
-    private price: ProductPrice,
-    private image: ProductImage,
-    private category: Category
+    public title: ProductTitle,
+    public description: ProductDescription,
+    public price: ProductPrice,
+    public image: ProductImage,
+    public category: Category
 
   ) {
     super();

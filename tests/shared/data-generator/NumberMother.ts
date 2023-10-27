@@ -1,11 +1,17 @@
 import { faker } from '@faker-js/faker';
 
 export class NumberMother {
-  static random(): number {
+
+  static randomInteger(): number {
+    return faker.number.int();
+  }
+
+  static randomFloat(): number {
     return faker.number.float();
   }
 
-  static between(min: number, max: number): number {
+  static betweenFloat(min: number, max: number): number {
     return faker.number.float({ min, max });
   }
+
 }
