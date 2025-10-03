@@ -2,7 +2,7 @@
 # Use a full Node image for building
 FROM node:22-bullseye-slim AS builder
 
-WORKDIR /code
+WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm install
