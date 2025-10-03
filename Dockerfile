@@ -1,4 +1,6 @@
-FROM node:22-bullseye-slim
+# === STAGE 1: Builder ===
+# Use a full Node image for building
+FROM node:22-bullseye-slim AS builder
 
 WORKDIR /code
 
