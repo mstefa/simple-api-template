@@ -18,6 +18,15 @@ interface AppConfig {
   };
 }
 
+console.log('Environment variables:', {
+  NODE_ENV: process.env.NODE_ENV,
+  SERVER_PORT: process.env.SERVER_PORT,
+  SERVER_HOST: process.env.SERVER_HOST,
+  BD_HOST: process.env.BD_HOST,
+  BD_USER: process.env.BD_USER ? '***' : '',
+  BD_PWD: process.env.BD_PWD ? '***' : '',
+});
+
 const config: AppConfig = {
   app: {
     name: 'test-api',
