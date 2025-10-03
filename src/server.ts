@@ -63,6 +63,14 @@ export default class Server {
 
   async start(): Promise<void> {
     Logger.info('  Connecting to DB... \n');
+    console.log('Environment variables:', {
+      NODE_ENV: process.env.NODE_ENV,
+      SERVER_PORT: process.env.SERVER_PORT,
+      SERVER_HOST: process.env.SERVER_HOST,
+      BD_HOST: process.env.BD_HOST,
+      BD_USER: process.env.BD_USER ? '***' : '',
+      BD_PWD: process.env.BD_PWD ? '***' : '',
+    });
     await (await this.DIContainer.mongoClient).connect();
     Logger.info('  checking DB connection... \n');
 
