@@ -2,8 +2,6 @@ import { json, urlencoded } from 'body-parser';
 import compress from 'compression';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
-import expressListRoutes from 'express-list-routes';
-import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
@@ -13,7 +11,8 @@ import { DependencyContainer } from './DependencyInjectionContainer';
 import { registerRoutes as registerArticleRoutes } from './routes';
 import { Logger } from './shared/infrastructure/logger/Logger';
 
-const router = Router();
+
+const router = express.Router();
 
 export default class Server {
   private express: express.Express;
@@ -77,14 +76,12 @@ export default class Server {
     await (await this.DIContainer.mongoClient).db('admin').command({ ping: 1 });
     Logger.info('  DB Connected! \n');
 
-    this.httpServer = await this.express.listen(this.port, () => {
+    this.httpServer = this.express.listen(this.port, () => {
       Logger.info(`  Routes loaded:`);
 
-      expressListRoutes(this.express, { prefix: '' });
+      //TODO: add route listing
 
       Logger.info(`\n`);
-
-
       Logger.info(`  App is running at http://localhost:${this.port}`);
       Logger.info('  Press CTRL-C to stop\n');
     });
