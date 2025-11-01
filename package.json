@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.2.0",
-    "@faker-js/faker": "^8.0.2",
+    "@faker-js/faker": "9.9.0",
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.13",
     "@types/express": "^5.0.5",
