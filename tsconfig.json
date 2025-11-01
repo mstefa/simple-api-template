@@ -5,6 +5,7 @@
     "target": "es6",
     "noImplicitAny": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "sourceMap": false,
     "rootDir": ".",
     "strict": true,
