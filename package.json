@@ -40,7 +40,7 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^9.4.0",
+    "@cucumber/cucumber": "^12.2.0",
     "@faker-js/faker": "^8.0.2",
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.13",
