@@ -5,7 +5,8 @@ export class ProductImage {
   constructor(value: string) {
     try {
       this.value = new URL(value).href;
-    } catch (_) {
+    } catch (e) {
+      console.error(e);
       throw new InvalidArgumentError(`The ProductImage <${value}> is an Invalid URL`
       )
     }

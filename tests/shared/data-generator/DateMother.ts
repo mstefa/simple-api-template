@@ -10,6 +10,6 @@ export class DateMother {
   }
 
   static between(from: Date | number | string, to: Date | number | string): Date {
-    return faker.date.between(from, to)
+    return faker.date.between({ from, to })
   }
 }
